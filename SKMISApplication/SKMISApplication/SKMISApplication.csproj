@@ -1204,13 +1204,6 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\SKMIS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SKMIS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SKMIS.edmx.diagram">
-      <DependentUpon>SKMIS.edmx</DependentUpon>
-    </Content>
     <Content Include="bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="bootstrap\css\bootstrap.css.map" />
@@ -1255,6 +1248,13 @@
     <Content Include="plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="plugins\input-mask\phone-codes\phone-codes.json" />
+    <EntityDeploy Include="Models\SKMIS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SKMIS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SKMIS.edmx.diagram">
+      <DependentUpon>SKMIS.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

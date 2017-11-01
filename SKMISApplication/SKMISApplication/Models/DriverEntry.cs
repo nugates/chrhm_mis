@@ -22,5 +22,17 @@ namespace SKMISApplication.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<long> WorkContactNumber { get; set; }
+        public string EmailID { get; set; }
+        public string ImagePath { get; set; }
+        public string LicenseNo { get; set; }
+        public string LicenseState { get; set; }
+        public Nullable<System.DateTime> LicenseExpiryDate { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public Nullable<long> AlternateContactNo { get; set; }
+        public string DriverAddress { get; set; }
+        public string City { get; set; }
+        public string Pin { get; set; }
+        public string Misc { get; set; }
     }
 }

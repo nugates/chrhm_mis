@@ -33,6 +33,18 @@
           <Property Name="CreatedDate" Type="date" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedDate" Type="date" />
+          <Property Name="WorkContactNumber" Type="bigint" />
+          <Property Name="EmailID" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
+          <Property Name="LicenseNo" Type="nvarchar(max)" />
+          <Property Name="LicenseState" Type="nvarchar(max)" />
+          <Property Name="LicenseExpiryDate" Type="datetime" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="AlternateContactNo" Type="bigint" />
+          <Property Name="DriverAddress" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Pin" Type="nvarchar(max)" />
+          <Property Name="Misc" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EmployeeEntry">
           <Key>
@@ -132,6 +144,18 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+          <Property Name="WorkContactNumber" Type="Int64" />
+          <Property Name="EmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="AlternateContactNo" Type="Int64" />
+          <Property Name="DriverAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Misc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmployeeEntry">
           <Key>
@@ -190,7 +214,7 @@
           <Property Name="UpdatedBy" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityContainer Name="SKMISEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SKMISEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BeneficiaryEntries" EntityType="Self.BeneficiaryEntry" />
           <EntitySet Name="DriverEntries" EntityType="Self.DriverEntry" />
           <EntitySet Name="EmployeeEntries" EntityType="Self.EmployeeEntry" />
@@ -203,7 +227,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SKMISModelStoreContainer" CdmEntityContainer="SKMISEntities3">
+        <EntityContainerMapping StorageEntityContainer="SKMISModelStoreContainer" CdmEntityContainer="SKMISEntities2">
           <EntitySetMapping Name="BeneficiaryEntries">
             <EntityTypeMapping TypeName="SKMISModel.BeneficiaryEntry">
               <MappingFragment StoreEntitySet="BeneficiaryEntry">
@@ -232,6 +256,18 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="WorkContactNumber" ColumnName="WorkContactNumber" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+                <ScalarProperty Name="LicenseState" ColumnName="LicenseState" />
+                <ScalarProperty Name="LicenseExpiryDate" ColumnName="LicenseExpiryDate" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="AlternateContactNo" ColumnName="AlternateContactNo" />
+                <ScalarProperty Name="DriverAddress" ColumnName="DriverAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="Misc" ColumnName="Misc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
