@@ -269,8 +269,6 @@
     <Content Include="ClientCss\Custom.css" />
     <Content Include="ClientJS\jquery.pleaseWait.js" />
     <Content Include="ClientJS\kmi-isvalid-1.0.0.js" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -355,7 +353,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\SKMIS.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SKMIS.edmx</DependentUpon>
@@ -1306,11 +1303,6 @@
     <Content Include="Views\Inventory\Details.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\Driver\Create.cshtml" />
-    <Content Include="Views\Driver\Delete.cshtml" />
-    <Content Include="Views\Driver\Details.cshtml" />
-    <Content Include="Views\Driver\Edit.cshtml" />
-    <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Vehicle\Create.cshtml" />
     <Content Include="Views\Vehicle\Delete.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
@@ -1333,6 +1325,11 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Views\Shared\_MenuAsidePartial.cshtml" />
+    <Content Include="Views\Driver\Create.cshtml" />
+    <Content Include="Views\Driver\Delete.cshtml" />
+    <Content Include="Views\Driver\Details.cshtml" />
+    <Content Include="Views\Driver\Edit.cshtml" />
+    <Content Include="Views\Driver\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
