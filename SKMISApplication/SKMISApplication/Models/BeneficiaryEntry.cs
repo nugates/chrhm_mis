@@ -14,16 +14,35 @@ namespace SKMISApplication.Models
     
     public partial class BeneficiaryEntry
     {
-        public long BeneficiaryId { get; set; }
-        public string BeneficiaryName { get; set; }
-        public string ConstituencyName { get; set; }
-        public string VillageName { get; set; }
-        public Nullable<int> WardNo { get; set; }
-        public Nullable<int> HouseNo { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BeneficiaryEntry()
+        {
+            this.BeneficiaryDocuments = new HashSet<BeneficiaryDocument>();
+        }
+    
+        public long ID { get; set; }
+        public string FullName { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string FatherOrMotherName { get; set; }
+        public Nullable<long> MobileNo { get; set; }
+        public string Religion { get; set; }
+        public string EmploymentType { get; set; }
+        public Nullable<long> AadharNo { get; set; }
+        public string Gender { get; set; }
+        public string MaritialStatus { get; set; }
+        public string Caste { get; set; }
+        public Nullable<long> WardID { get; set; }
+        public string Qualification { get; set; }
+        public string Occupation { get; set; }
+        public Nullable<long> AnnualIncome { get; set; }
+        public string Category { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BeneficiaryDocument> BeneficiaryDocuments { get; set; }
     }
 }

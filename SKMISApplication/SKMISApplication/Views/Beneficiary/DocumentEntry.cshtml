@@ -1,0 +1,199 @@
+﻿@model IEnumerable<SKMISApplication.Models.BeneficiaryDocumentModel>
+@{
+    ViewBag.Title = "DocumentEntry";
+}
+
+@using (Html.BeginForm("Upload", "BeneficiaryDocumentEntry", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <div class="page-header header-div">
+            <div class="container-fluid conainer-background-header"><h3 class="header-text">Beneficiary Documents Upload</h3></div>
+        </div>
+        <div class="col-md-5">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.FirstOrDefault().BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @Value = ViewData["BeneficiaryID"].ToString() } })
+            @*<div class="form-group">
+                @Html.Label("Beneficiary Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        @Html.DropDownListFor(model => model.FirstOrDefault().BeneficiaryID, new SelectList(ViewData["BeneficiaryNameList"] as SelectList, "Value", "Text"),
+                       "Select Beneficiary Name", htmlAttributes: new { @class = "form-control select2" })
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstOrDefault().BeneficiaryName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        @Html.EditorFor(model => model.FirstOrDefault().BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = ViewData["BeneficiaryName"].ToString() } })
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstOrDefault().DocumentName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        @Html.EditorFor(model => model.FirstOrDefault().DocumentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().DocumentName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Upload Document</label>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" name="file" id="imgInp" />
+                        </span>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="img-name" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                </div>
+            </div>
+            <div style="margin-top:2%;">
+                <img id='img-upload' height="250" />
+            </div>
+
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <table class="table table-bordered table-striped" id="aniamlGrid">
+                    <thead>
+                        <tr>
+                            <th width="60%">
+                                @Html.DisplayNameFor(model => model.DocumentNameGrid)
+                            </th>
+                            <th width="8%">Download</th>
+                            <th width="8%">Preview  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentNameGrid)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(" ", "Download", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-success glyphicon glyphicon-download" })
+                                </td>
+                                <td>
+                                    <button type="button" onclick="previewImg('@item.FileLocation.Replace("~","")')" value="" class="btn btn-block btn-primary glyphicon glyphicon-eye-open" style="width:120%" />
+                                    @*@Html.Action(new { id = item.FileLocation.Replace("~/","") }, htmlAttributes: new { @class = "btn btn-block bg-orange glyphicon glyphicon-edit",  style = "target:_blank",})*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    #img-upload {
+        width: 100%;
+    }
+
+    #img-uploadgrid {
+        width: 20%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#aniamlGrid").DataTable({
+            "sScrollX": "99.8%"
+        });
+        //$("docGrid").DataTable({
+        //    "sScrollX": "99.8%"
+        //});
+
+        function readURL(input) {
+            var extension = input.files[0].name.substr((input.files[0].name.lastIndexOf('.') + 1));
+            var size = input.files[0].size / 1024;
+            $('#img-name').val(input.files[0].name);
+            if (extension == "png" || "jpeg") {
+                if (size <= 300) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img-upload').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+
+                    $(document).on('change', '.btn-file :file', function () {
+                        var input = $(this),
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                    });
+
+                    $('.btn-file :file').on('fileselect', function (event, label) {
+                        var input = $(this).parents('.input-group').find(':text'),
+                            log = label;
+                        if (input.length) {
+                            input.val(log);
+                        } else {
+                            if (log);
+                        }
+                    });
+                }
+                else {
+                    alert("exceed file size");
+                    $("#imgInp")[0].value = "";
+                }
+            }
+            else {
+                alert("please enter files with format: ")
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    });
+    function previewImg(fPath) {
+        window.open('http://' + window.location.host + fPath, "_blank");
+    }
+</script>

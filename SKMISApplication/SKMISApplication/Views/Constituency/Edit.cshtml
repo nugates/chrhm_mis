@@ -1,0 +1,51 @@
+﻿@model SKMISApplication.Models.ConstituencyModel
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="header-div">
+        <div class="form-horizontal">
+            <div class="page-header">
+                <div class="container-fluid conainer-background-header"><h3 class="header-text">Create Constituency</h3></div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Constituency, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </div>
+                                @Html.EditorFor(model => model.Constituency, new { htmlAttributes = new { @class = "form-control", placeholder = "Constituency" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Constituency, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "description", placeholder = "Description" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-10">
+                            <input type="submit" style="width:25%" id="update" value="Update" class="btn btn-success" />
+                            <span style="padding-left:2%">@Html.ActionLink("Back to List", "Index", "", htmlAttributes: new { @class = "btn btn-primary" })</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
