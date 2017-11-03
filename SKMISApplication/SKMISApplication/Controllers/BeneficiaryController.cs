@@ -12,7 +12,7 @@ namespace SKMISApplication.Controllers
 {
     public class BeneficiaryController : Controller
     {
-        private SKMISEntities3 db = new SKMISEntities3();
+        private SKMISEntities2 db = new SKMISEntities2();
         // GET: Beneficiary
         public ActionResult Index()
         {

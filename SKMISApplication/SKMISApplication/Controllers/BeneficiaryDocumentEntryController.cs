@@ -12,7 +12,7 @@ namespace SKMISApplication.Controllers
 {
     public class BeneficiaryDocumentEntryController : Controller
     {
-        private SKMISEntities3 db = new SKMISEntities3();
+        private SKMISEntities2 db = new SKMISEntities2();
         public async Task<ActionResult> Index()
         {
             BeneficiaryDocumentModel cdm = new BeneficiaryDocumentModel();

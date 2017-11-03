@@ -13,7 +13,7 @@ namespace SKMISApplication.Controllers
 {
     public class VehicleController : Controller
     {
-        private SKMISEntities3 db = new SKMISEntities3();
+        private SKMISEntities2 db = new SKMISEntities2();
 
         // GET: Vehicle
         public async Task<ActionResult> Index()

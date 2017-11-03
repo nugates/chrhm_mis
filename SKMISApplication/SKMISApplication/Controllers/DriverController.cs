@@ -13,7 +13,7 @@ namespace SKMISApplication.Controllers
 {
     public class DriverController : Controller
     {
-        private SKMISEntities3 db = new SKMISEntities3();
+        private SKMISEntities2 db = new SKMISEntities2();
 
         // GET: Driver
         public async Task<ActionResult> Index()

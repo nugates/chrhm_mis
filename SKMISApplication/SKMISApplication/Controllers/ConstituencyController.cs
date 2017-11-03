@@ -12,7 +12,7 @@ namespace SKMISApplication.Controllers
 {
     public class ConstituencyController : Controller
     {
-        private SKMISEntities3 db = new SKMISEntities3();
+        private SKMISEntities2 db = new SKMISEntities2();
         // GET: Constituency
         public ActionResult Index()
         {
