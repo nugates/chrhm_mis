@@ -11,9 +11,11 @@ namespace SKMISApplication.Models
         
         public long VendorId { get; set; }
 
+        [Required]
         [Display(Name = "Vendor Name")]
         public string VendorName { get; set; }
 
+        [Required]
         [Display(Name = "Address")]
         public string VendorAddress { get; set; }
         
@@ -24,6 +26,7 @@ namespace SKMISApplication.Models
         [Display(Name = "Pin Code")]
         public Nullable<long> PinCode { get; set; }
 
+        [Required]
         [Display(Name = "Mobile No")]
         public Nullable<long> MobileNo { get; set; }
 
