@@ -201,7 +201,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeneficiaryController.cs" />
-    <Compile Include="Controllers\BeneficiaryControllerold.cs" />
     <Compile Include="Controllers\BeneficiaryDocumentEntryController.cs" />
     <Compile Include="Controllers\ConstituencyController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
@@ -216,74 +215,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BeneficiaryDocument.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BeneficiaryDocumentModel.cs" />
-    <Compile Include="Models\BeneficiaryEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BeneficiaryEntryModel.cs" />
-    <Compile Include="Models\BeneficiaryEntry_old.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CasteMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ConstituencyMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ConstituencyModel.cs" />
-    <Compile Include="Models\DisabilityMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DriverEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DriverEntryModel.cs" />
-    <Compile Include="Models\EmployeeEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmployeeEntryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\InventoryEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\InventoryEntryModel.cs" />
     <Compile Include="Models\ListFiller.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\OccupationMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\QualificationMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SKMIS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SKMIS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SKMIS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SKMIS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SKMIS.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VehicleEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\VehicleEntryModel.cs" />
-    <Compile Include="Models\VendorEntry.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\VendorEntryModel.cs" />
-    <Compile Include="Models\WardMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -383,16 +325,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\SKMIS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SKMIS.edmx</DependentUpon>
-      <LastGenOutput>SKMIS.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\SKMIS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SKMIS.edmx</DependentUpon>
-      <LastGenOutput>SKMIS.cs</LastGenOutput>
-    </Content>
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\charts\flot.html" />
@@ -1275,13 +1207,6 @@
     <Content Include="plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="plugins\input-mask\phone-codes\phone-codes.json" />
-    <EntityDeploy Include="Models\SKMIS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SKMIS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SKMIS.edmx.diagram">
-      <DependentUpon>SKMIS.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1294,7 +1219,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
