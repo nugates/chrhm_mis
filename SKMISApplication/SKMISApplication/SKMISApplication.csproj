@@ -211,7 +211,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TaskActionResult.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
-    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorEntryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1343,11 +1343,11 @@
     <Content Include="Views\Vendor\Details.cshtml" />
     <Content Include="Views\Vendor\Edit.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
-    <Content Include="Views\Beneficiaryold\Create.cshtml" />
-    <Content Include="Views\Beneficiaryold\Delete.cshtml" />
-    <Content Include="Views\Beneficiaryold\Details.cshtml" />
-    <Content Include="Views\Beneficiaryold\Edit.cshtml" />
-    <Content Include="Views\Beneficiaryold\Index.cshtml" />
+    <Content Include="Views\Beneficiary\Create.cshtml" />
+    <Content Include="Views\Beneficiary\Delete.cshtml" />
+    <Content Include="Views\Beneficiary\Details.cshtml" />
+    <Content Include="Views\Beneficiary\Edit.cshtml" />
+    <Content Include="Views\Beneficiary\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Delete.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
@@ -1360,15 +1360,6 @@
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
-    <Content Include="Views\Beneficiary\Create.cshtml" />
-    <Content Include="Views\Beneficiary\DocumentEntry.cshtml" />
-    <Content Include="Views\Beneficiary\Edit.cshtml" />
-    <Content Include="Views\Beneficiary\Index.cshtml" />
-    <Content Include="Views\Beneficiary\ViewDocument.cshtml" />
-    <Content Include="Views\BeneficiaryDocumentEntry\Index.cshtml" />
-    <Content Include="Views\Constituency\Create.cshtml" />
-    <Content Include="Views\Constituency\Edit.cshtml" />
-    <Content Include="Views\Constituency\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

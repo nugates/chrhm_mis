@@ -4,7 +4,6 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
 <script>
     $(function () {
@@ -25,7 +24,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        
+
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.DriverId)
 
@@ -117,79 +116,80 @@
                                             </div>
                                             @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
                                         </div>
-                                        <div class="clearfix"></div>
-
-                                        @*<div class="form-group" style="padding-top: 5px;">
-                                                @Html.LabelFor(model => model.AlternateContactNo, htmlAttributes: new { @class = "control-label col-md-3" })
-                                                <div class="col-md-9">
-                                                    @Html.EditorFor(model => model.AlternateContactNo, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.AlternateContactNo, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>*@
-                                        <div class="form-group" style="padding-top: 5px;">
-                                            @Html.LabelFor(model => model.DriverAddress, htmlAttributes: new { @class = "control-label col-md-3" })
-                                            <div class="col-md-9">
-                                                @Html.TextAreaFor(model => model.DriverAddress, new { htmlAttributes = new { @class = "form-control" }, style = "width:100%;height:100%" })
-                                                @Html.ValidationMessageFor(model => model.DriverAddress, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="form-group" style="padding-top: 5px;">
-                                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-3" })
-                                            <div class="col-md-9">
-                                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="form-group" style="padding-top: 5px;">
-                                            @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label col-md-3" })
-                                            <div class="col-md-9">
-                                                @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="form-group" style="padding-top: 5px;">
-                                            @Html.LabelFor(model => model.Misc, htmlAttributes: new { @class = "control-label col-md-3" })
-                                            <div class="col-md-9">
-                                                @Html.TextAreaFor(model => model.Misc, new { htmlAttributes = new { @class = "form-control" }, style = "width:100%;height:100%" })
-                                                @Html.ValidationMessageFor(model => model.Misc, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
                                     </div>
                                     <div class="clearfix"></div>
+
                                     @*<div class="form-group" style="padding-top: 5px;">
-                                            <div class="col-md-offset-2 col-md-12">
-                                                <input type="submit" value="Create" class="btn btn-default" />
+                                            @Html.LabelFor(model => model.AlternateContactNo, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.AlternateContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.AlternateContactNo, "", new { @class = "text-danger" })
                                             </div>
-                                        </div>*@
-                                </div>
-
-
-                                <div class="row" style="margin-bottom: 15px;">
-                                    <div class="col-lg-12">
-                                        <hr />
-                                        <div class="col-lg-3"></div>
-                                        <div class="col-lg-3" style="text-align: left">
-                                            <input type="submit" value="Save" class="btn btn-block btn-success" />
                                         </div>
-                                        <div class="col-lg-3" style="text-align: center">
-                                            <input type="submit" value="Cancel" class="btn btn-block btn-danger" />
+                                        <div class="clearfix"></div>*@
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        @Html.LabelFor(model => model.DriverAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.DriverAddress, new { htmlAttributes = new { @class = "form-control" }, style = "width:100%;height:100%" })
+                                            @Html.ValidationMessageFor(model => model.DriverAddress, "", new { @class = "text-danger" })
                                         </div>
-                                        <div class="col-lg-3"></div>
                                     </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        @Html.LabelFor(model => model.Misc, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.Misc, new { htmlAttributes = new { @class = "form-control" }, style = "width:100%;height:100%" })
+                                            @Html.ValidationMessageFor(model => model.Misc, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
+                                <div class="clearfix"></div>
+                                @*<div class="form-group" style="padding-top: 5px;">
+                                        <div class="col-md-offset-2 col-md-12">
+                                            <input type="submit" value="Create" class="btn btn-default" />
+                                        </div>
+                                    </div>*@
                             </div>
 
 
+                            <div class="row" style="margin-bottom: 15px;">
+                                <div class="col-lg-12">
+                                    <hr />
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-3" style="text-align: left">
+                                        <input type="submit" value="Save" class="btn btn-block btn-success" />
+                                    </div>
+                                    <div class="col-lg-3" style="text-align: center">
+                                        <input type="submit" value="Cancel" class="btn btn-block btn-danger" />
+                                    </div>
+                                    <div class="col-lg-3"></div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.box-body -->
+
+
                     </div>
+                    <!-- /.box-body -->
                 </div>
             </div>
+        </div>
     </section>
 }
 

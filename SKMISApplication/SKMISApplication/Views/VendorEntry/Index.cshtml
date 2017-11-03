@@ -1,47 +1,44 @@
-﻿@model IEnumerable<SKMISApplication.Models.DriverEntryModel>
+﻿@model IEnumerable<SKMISApplication.Models.VendorEntryModel>
 
 @{
     ViewBag.Title = "Index";
 }
+
 
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Driver List</h3>
+                    <h3 class="box-title">Vendor List</h3>
                     <div style="float: right;">
                         @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
-                        @Html.ActionLink("CREATE DRIVER", "Create", "Driver", new { @class = "btn btn-block btn-primary" })
+                        @Html.ActionLink("CREATE VENDOR", "Create", "VendorEntry", new { @class = "btn btn-block btn-primary" })
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table" id="tblDriver">
+                    <table class="table" id="tblVendor">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DriverId)
+                                    @Html.DisplayNameFor(model => model.VendorName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DriverName)
+                                    @Html.DisplayNameFor(model => model.VendorAddress)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DriverContactNumber)
+                                    @Html.DisplayNameFor(model => model.City)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DriverAddress)
+                                    @Html.DisplayNameFor(model => model.PinCode)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.LicenseNo)
+                                    @Html.DisplayNameFor(model => model.MobileNo)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.LicenseState)
+                                    @Html.DisplayNameFor(model => model.Fax)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.LicenseExpiryDate)
-                                </th>
-
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -51,33 +48,29 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DriverId)
+                                        @Html.DisplayFor(modelItem => item.VendorName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DriverName)
+                                        @Html.DisplayFor(modelItem => item.VendorAddress)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DriverContactNumber)
+                                        @Html.DisplayFor(modelItem => item.City)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DriverAddress)
+                                        @Html.DisplayFor(modelItem => item.PinCode)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LicenseNo)
+                                        @Html.DisplayFor(modelItem => item.MobileNo)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LicenseState)
+                                        @Html.DisplayFor(modelItem => item.Fax)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LicenseExpiryDate)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink(" ", "Edit", new { id = item.DriverId }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
-
+                                        @Html.ActionLink(" ", "Edit", new { id = item.VendorId }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
                                     </td>
                                     <td>
                                         <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash"
-                                           onclick="deleteAnimal(@item.DriverId, '@item.DriverName')"></a>
+                                           onclick="deleteVendor(@item.VendorId, '@item.VendorName')"></a>
                                     </td>
                                 </tr>
                             }
@@ -94,37 +87,16 @@
 
 
 <script>
-    window.onload = function () { ShortTable("#tblDriver"); };
+    window.onload = function () { ShortTable("#tblVendor"); };
 
     function ShortTable(Tbl) {
-        //$(Tbl).DataTable({
-        //    "paging": true,
-        //    "lengthChange": true,
-        //    "searching": true,
-        //    "ordering": true,
-        //    "info": true,
-        //    "autoWidth": false,
-        //    "sScrollX": "99.8%",
-        //    dom: 'C<"clear">lfrtip',
-        //    colVis: {
-        //        exclude: [0]
-        //    }
-
-        //});
         $(Tbl).DataTable({
             "order": [[0, "desc"]],
             "sScrollX": "99.8%"
         });
-        
-        //table
-        //    .order([0, 'desc'])
-        //    .draw();
     }
 
-    
-
-
-    function deleteDriver(id, aname) {
+    function deleteVendor(id, aname) {
         swal({
             title: "Are you sure you want to delete?",
             text: "",
@@ -164,3 +136,6 @@ function loadAjax(id, url) {
     });
 }
 </script>
+
+
+

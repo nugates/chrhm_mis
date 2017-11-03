@@ -4,21 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SKMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BeneficiaryDocuments">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BeneficiaryID" Type="bigint" />
-          <Property Name="FileLocation" Type="varchar(max)" />
-          <Property Name="IsActive" Type="bit" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="int" />
-          <Property Name="DocumentName" Type="varchar" MaxLength="50" />
-        </EntityType>
+      <Schema Namespace="SKMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BeneficiaryEntry">
           <Key>
             <PropertyRef Name="ID" />
@@ -469,6 +455,14 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
+        <EntityContainer Name="SKMISEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BeneficiaryEntries" EntityType="Self.BeneficiaryEntry" />
+          <EntitySet Name="DriverEntries" EntityType="Self.DriverEntry" />
+          <EntitySet Name="EmployeeEntries" EntityType="Self.EmployeeEntry" />
+          <EntitySet Name="InventoryEntries" EntityType="Self.InventoryEntry" />
+          <EntitySet Name="VehicleEntries" EntityType="Self.VehicleEntry" />
+          <EntitySet Name="VendorEntries" EntityType="SKMISModel.VendorEntry" />
+        </EntityContainer>
         <EntityType Name="VendorEntry">
           <Key>
             <PropertyRef Name="VendorId" />
@@ -483,63 +477,21 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
-          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PinCode" Type="Int64" />
-          <Property Name="MobileNo" Type="Int64" />
-          <Property Name="PhoneNo" Type="Int64" />
-          <Property Name="Fax" Type="Int64" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Misc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="WardMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WardNumber" Type="Int32" />
-          <Property Name="WardName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RevenueBlock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int32" />
-        </EntityType>
-        <Association Name="FK_BeneficiaryDocuments_BeneficiaryEntry">
-          <End Type="SKMISModel.BeneficiaryEntry" Role="BeneficiaryEntry" Multiplicity="0..1" />
-          <End Type="SKMISModel.BeneficiaryDocument" Role="BeneficiaryDocument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BeneficiaryEntry">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="BeneficiaryDocument">
-              <PropertyRef Name="BeneficiaryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityContainer Name="SKMISEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BeneficiaryEntries" EntityType="Self.BeneficiaryEntry" />
+          <EntitySet Name="DriverEntries" EntityType="Self.DriverEntry" />
+          <EntitySet Name="EmployeeEntries" EntityType="Self.EmployeeEntry" />
+          <EntitySet Name="InventoryEntries" EntityType="Self.InventoryEntry" />
+          <EntitySet Name="VehicleEntries" EntityType="Self.VehicleEntry" />
+          <EntitySet Name="VendorEntries" EntityType="Self.VendorEntry" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SKMISModelStoreContainer" CdmEntityContainer="SKMISEntities2">
-          <EntitySetMapping Name="BeneficiaryDocuments">
-            <EntityTypeMapping TypeName="SKMISModel.BeneficiaryDocument">
-              <MappingFragment StoreEntitySet="BeneficiaryDocuments">
-                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="FileLocation" ColumnName="FileLocation" />
-                <ScalarProperty Name="BeneficiaryID" ColumnName="BeneficiaryID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BeneficiaryEntries">
             <EntityTypeMapping TypeName="SKMISModel.BeneficiaryEntry">
               <MappingFragment StoreEntitySet="BeneficiaryEntry">
@@ -742,22 +694,15 @@
                 <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WardMasters">
-            <EntityTypeMapping TypeName="SKMISModel.WardMaster">
-              <MappingFragment StoreEntitySet="WardMaster">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RevenueBlock" ColumnName="RevenueBlock" />
-                <ScalarProperty Name="WardName" ColumnName="WardName" />
-                <ScalarProperty Name="WardNumber" ColumnName="WardNumber" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

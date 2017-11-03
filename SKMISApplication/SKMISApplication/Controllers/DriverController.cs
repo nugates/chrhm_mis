@@ -75,7 +75,6 @@ namespace SKMISApplication.Controllers
             if (ModelState.IsValid)
             {
                 DriverEntry _dEntry = new DriverEntry();
-                _dEntry.DriverId = driverEntry.DriverId;
                 _dEntry.DriverName = driverEntry.DriverName;
                 _dEntry.DriverContactNumber = driverEntry.DriverContactNumber;
                 _dEntry.WorkContactNumber = driverEntry.WorkContactNumber;
@@ -176,12 +175,14 @@ namespace SKMISApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DriverEntry driverEntry = await db.DriverEntries.FindAsync(id);
-            if (driverEntry == null)
-            {
-                return HttpNotFound();
-            }
-            return View(driverEntry);
+
+            DriverEntry _dvr = await db.DriverEntries.FindAsync(id);
+            _dvr.DriverId = (long)id;
+            _dvr.IsActive = false;
+            db.Entry(_dvr).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+
         }
 
         // POST: Driver/Delete/5
