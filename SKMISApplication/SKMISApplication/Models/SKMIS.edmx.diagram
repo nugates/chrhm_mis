@@ -5,12 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6f1f5c72721b43ef9881b3090d46ab03" Name="Diagram1">
-        <EntityTypeShape EntityType="SKMISModel.BeneficiaryEntry" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SKMISModel.DriverEntry" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SKMISModel.EmployeeEntry" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SKMISModel.InventoryEntry" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SKMISModel.VehicleEntry" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SKMISModel.VendorEntry" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SKMISModel.BeneficiaryDocument" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="SKMISModel.BeneficiaryEntry" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="SKMISModel.BeneficiaryEntry_old" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SKMISModel.CasteMaster" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SKMISModel.ConstituencyMaster" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SKMISModel.DisabilityMaster" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SKMISModel.DriverEntry" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SKMISModel.EmployeeEntry" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SKMISModel.InventoryEntry" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SKMISModel.OccupationMaster" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SKMISModel.QualificationMaster" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SKMISModel.VehicleEntry" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SKMISModel.VendorEntry" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SKMISModel.WardMaster" Width="1.5" PointX="11.75" PointY="0.75" />
+        <AssociationConnector Association="SKMISModel.FK_BeneficiaryDocuments_BeneficiaryEntry" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

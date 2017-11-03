@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SKMISApplication.Models.BeneficiaryDocumentModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Beneficiery Documents List</h3>
+                    <div style="float: right;">
+                        @Html.ActionLink("Back to List", "Index", "Beneficiary", new { @class = "btn btn-block btn-primary" })
+                    </div>
+                        <div style="float: right; margin-right:5px;">
+                            @Html.ActionLink("Add Document", "DocumentEntry", new { id = ViewData["Beneficiaryid"].ToString() }, htmlAttributes: new { @class = "btn btn-block btn-primary" })
+                        
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" >
+                    <table class="table table-bordered table-striped" id="docGrid">
+                        <thead>
+                            <tr>
+                                <th width="80%">
+                                    @Html.DisplayNameFor(model => model.DocumentName)
+                                </th>
+                                <th width="10%">Download</th>
+                                <th width="10%">Preview  </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "Download", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-success glyphicon glyphicon-download" })
+                                    </td>
+                                    <td>
+                                        <button type="button" onclick="previewImg('@item.FileLocation.Replace("~", "")')" value="" class="btn btn-block btn-primary glyphicon glyphicon-eye-open"/>
+                                        @*@Html.Action(new { id = item.FileLocation.Replace("~/","") }, htmlAttributes: new { @class = "btn btn-block bg-orange glyphicon glyphicon-edit",  style = "target:_blank",})*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+}
+<script>
+    window.onload = function () { ShortTable("#docGrid"); };
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "sScrollX": "99.8%"
+
+        });
+    }
+    $(document).ready(function () {
+
+        function readURL(input) {
+            var extension = input.files[0].name.substr((input.files[0].name.lastIndexOf('.') + 1));
+            var size = input.files[0].size / 1024;
+
+            if (extension == "png" || "jpeg") {
+                if (size <= 300) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img-upload').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+
+                    $(document).on('change', '.btn-file :file', function () {
+                        var input = $(this),
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                    });
+
+                    $('.btn-file :file').on('fileselect', function (event, label) {
+                        var input = $(this).parents('.input-group').find(':text'),
+                            log = label;
+                        if (input.length) {
+                            input.val(log);
+                        } else {
+                            if (log);
+                        }
+                    });
+                }
+                else {
+                    alert("exceed file size");
+                    $("#imgInp")[0].value = "";
+                }
+            }
+            else {
+                alert("please enter files with format: ")
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    });
+    function previewImg(fPath) {
+        window.open('http://' + window.location.host + fPath, "_blank");
+    }
+</script>
+
