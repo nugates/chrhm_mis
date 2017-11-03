@@ -223,9 +223,6 @@
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeneficiaryEntryModel.cs" />
-    <Compile Include="Models\BeneficiaryEntry_old.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CasteMaster.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
@@ -233,9 +230,6 @@
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConstituencyModel.cs" />
-    <Compile Include="Models\DisabilityMaster.cs">
-      <DependentUpon>SKMIS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DriverEntry.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
