@@ -1361,6 +1361,8 @@
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\Beneficiary\DocumentEntry.cshtml" />
+    <Content Include="Views\Beneficiary\ViewDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

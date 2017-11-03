@@ -69,6 +69,7 @@ namespace SKMISApplication.Controllers
             _cEntry.CasteList = new SelectList(ListFillerCaste(), "ID", "CasteName");
             _cEntry.OccupationList = new SelectList(ListFillerOccupation(), "ID", "OccupationTitle");
             _cEntry.QualificationList = new SelectList(ListFillerQualification(), "ID", "QualificationName");
+            _cEntry.ConstituencyList = new SelectList(ListFillerConstituency(), "ID", "ConstituencyName");
             return View(_cEntry);
         }
 
@@ -348,19 +349,19 @@ namespace SKMISApplication.Controllers
                          });
             return result;
         }
-        public IEnumerable<Disability> ListFillerDisability()
+        public IEnumerable<Constituency> ListFillerConstituency()
         {
-            var result = (from an in db.DisabilityMasters
+            var result = (from an in db.ConstituencyMasters
                           where an.IsActive == true
                           select new
                           {
                               ID = an.ID,
-                              DisabilityType = an.DisabilityType
+                              ConstituencyName = an.Constituency
                           }).ToList()
-                         .Select(d => new Disability()
+                         .Select(d => new Constituency()
                          {
                              ID = d.ID,
-                             DisabilityType = d.DisabilityType
+                             ConstituencyName = d.ConstituencyName
                          });
             return result;
         }
