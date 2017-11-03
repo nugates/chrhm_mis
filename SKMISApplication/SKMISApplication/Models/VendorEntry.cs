@@ -24,5 +24,13 @@ namespace SKMISApplication.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public byte[] UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string State { get; set; }
+        public Nullable<long> PinCode { get; set; }
+        public Nullable<long> MobileNo { get; set; }
+        public Nullable<long> PhoneNo { get; set; }
+        public Nullable<long> Fax { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+        public string Misc { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SKMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SKMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BeneficiaryEntry">
           <Key>
             <PropertyRef Name="BeneficiaryId" />
@@ -102,6 +102,14 @@
           <Property Name="CreatedDate" Type="date" />
           <Property Name="UpdatedBy" Type="varbinary" MaxLength="50" />
           <Property Name="UpdatedDate" Type="date" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="PinCode" Type="bigint" />
+          <Property Name="MobileNo" Type="bigint" />
+          <Property Name="PhoneNo" Type="bigint" />
+          <Property Name="Fax" Type="bigint" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="Misc" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="SKMISModelStoreContainer">
           <EntitySet Name="BeneficiaryEntry" EntityType="Self.BeneficiaryEntry" Schema="dbo" store:Type="Tables" />
@@ -111,8 +119,7 @@
           <EntitySet Name="VehicleEntry" EntityType="Self.VehicleEntry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorEntry" EntityType="Self.VendorEntry" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SKMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -199,6 +206,14 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
+        <EntityContainer Name="SKMISEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BeneficiaryEntries" EntityType="Self.BeneficiaryEntry" />
+          <EntitySet Name="DriverEntries" EntityType="Self.DriverEntry" />
+          <EntitySet Name="EmployeeEntries" EntityType="Self.EmployeeEntry" />
+          <EntitySet Name="InventoryEntries" EntityType="Self.InventoryEntry" />
+          <EntitySet Name="VehicleEntries" EntityType="Self.VehicleEntry" />
+          <EntitySet Name="VendorEntries" EntityType="SKMISModel.VendorEntry" />
+        </EntityContainer>
         <EntityType Name="VendorEntry">
           <Key>
             <PropertyRef Name="VendorId" />
@@ -213,21 +228,21 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="Int64" />
+          <Property Name="MobileNo" Type="Int64" />
+          <Property Name="PhoneNo" Type="Int64" />
+          <Property Name="Fax" Type="Int64" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Misc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="SKMISEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BeneficiaryEntries" EntityType="Self.BeneficiaryEntry" />
-          <EntitySet Name="DriverEntries" EntityType="Self.DriverEntry" />
-          <EntitySet Name="EmployeeEntries" EntityType="Self.EmployeeEntry" />
-          <EntitySet Name="InventoryEntries" EntityType="Self.InventoryEntry" />
-          <EntitySet Name="VehicleEntries" EntityType="Self.VehicleEntry" />
-          <EntitySet Name="VendorEntries" EntityType="Self.VendorEntry" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SKMISModelStoreContainer" CdmEntityContainer="SKMISEntities2">
+        <EntityContainerMapping StorageEntityContainer="SKMISModelStoreContainer" CdmEntityContainer="SKMISEntities3">
           <EntitySetMapping Name="BeneficiaryEntries">
             <EntityTypeMapping TypeName="SKMISModel.BeneficiaryEntry">
               <MappingFragment StoreEntitySet="BeneficiaryEntry">
@@ -319,16 +334,24 @@
           <EntitySetMapping Name="VendorEntries">
             <EntityTypeMapping TypeName="SKMISModel.VendorEntry">
               <MappingFragment StoreEntitySet="VendorEntry">
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Misc" ColumnName="Misc" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

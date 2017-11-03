@@ -208,7 +208,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TaskActionResult.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
-    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorEntryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1308,11 +1308,6 @@
     <Content Include="Views\Vehicle\Details.cshtml" />
     <Content Include="Views\Vehicle\Edit.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
-    <Content Include="Views\Vendor\Create.cshtml" />
-    <Content Include="Views\Vendor\Delete.cshtml" />
-    <Content Include="Views\Vendor\Details.cshtml" />
-    <Content Include="Views\Vendor\Edit.cshtml" />
-    <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Beneficiary\Create.cshtml" />
     <Content Include="Views\Beneficiary\Delete.cshtml" />
     <Content Include="Views\Beneficiary\Details.cshtml" />
@@ -1330,6 +1325,11 @@
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\VendorEntry\Create.cshtml" />
+    <Content Include="Views\VendorEntry\Delete.cshtml" />
+    <Content Include="Views\VendorEntry\Details.cshtml" />
+    <Content Include="Views\VendorEntry\Edit.cshtml" />
+    <Content Include="Views\VendorEntry\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
