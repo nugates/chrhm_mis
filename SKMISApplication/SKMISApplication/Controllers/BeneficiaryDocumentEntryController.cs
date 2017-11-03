@@ -41,30 +41,6 @@ namespace SKMISApplication.Controllers
             return View(result.ToList());
 
         }
-        public ActionResult Upload()
-        {
-            BeneficiaryDocumentModel _cDoc = new BeneficiaryDocumentModel();
-            //_cDoc.DocList = new SelectList(ListFillerDoc(), "ID", "DocumentTitle");
-            _cDoc.NameList = new SelectList(ListFillerName(), "ID", "FullName");
-            return View(_cDoc);
-        }
-        public IEnumerable<Name> ListFillerName()
-        {
-            var result = (from an in db.BeneficiaryEntries
-                          where an.IsActive == true
-                          select new
-                          {
-                              ID = an.ID,
-                              BeneficiaryName = an.FullName
-                          }).ToList()
-             .Select(d => new Name()
-             {
-                 ID = d.ID,
-                 FullName = d.BeneficiaryName
-             });
-            return result;
-        }
-
 
         [HttpPost]
         public async Task<ActionResult> Upload(HttpPostedFileBase file, BeneficiaryDocumentModel _beneficiaryDocuments)

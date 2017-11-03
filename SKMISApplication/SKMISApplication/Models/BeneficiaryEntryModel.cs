@@ -50,18 +50,11 @@ namespace SKMISApplication.Models
         //[Required]
         [DisplayName("Employment Type")]
         public string EmploymentType { get; set; }
-
-        [DisplayName("Spouse Name")]
-        public string SpouceName { get; set; }
-
+        
         //[Required]
         [DisplayName("Aadhar No")]
         public Nullable<long> AadharNo { get; set; }
-
-        //[Required]
-        [DisplayName("Identification Type")]
-        public string IdentificationType { get; set; }
-
+        
         //[Required]
         [DisplayName("Gender")]
         public string Gender { get; set; }
@@ -82,64 +75,42 @@ namespace SKMISApplication.Models
         public string QualificationID { get; set; }
 
         //[Required]
-        [DisplayName("Details")]
-        public string Details { get; set; }
-
-        //[Required]
         [DisplayName("Occupation")]
         public string OccupationID { get; set; }
-
-        //[Required]
-        [DisplayName("Disability Type")]
-        public string DisabilityID { get; set; }
-
+        
         //[Required]
         [DisplayName("Annual Income")]
         public Nullable<long> AnnualIncome { get; set; }
 
-        [DisplayName("Is Family Head")]
-        public bool IsFamilyHead { get; set; }
+        [DisplayName("Constituency")]
+        public Nullable<int> ConstituencyID { get; set; }
 
-        [DisplayName("Is Voter")]
-        public bool IsVoter { get; set; }
+        [DisplayName("Ward")]
+        public string WardName { get; set; }
 
-        [DisplayName("Additional Qualification")]
-        public string AddlQualification { get; set; }
+        [DisplayName("Caste")]
+        public string CasteName { get; set; }
 
-        [DisplayName("Physically Challenged")]
-        public bool PhysicallyChallenged { get; set; }
+        [DisplayName("Qualification")]
+        public string QualificationName { get; set; }
 
-        [DisplayName("Non Resident")]
-        public bool NonResident { get; set; }
+        [DisplayName("Occupation")]
+        public string OccupationName { get; set; }
 
-        [DisplayName("Household")]
-        public Nullable<int> HouseholdID { get; set; }
-        
 
         [NotMapped]
         public SelectList CasteList { get; set; }
-        public string CasteName { get; set; }
 
         [NotMapped]
         public SelectList WardList { get; set; }
-        [DisplayName("Ward Name")]
-        public string WardName { get; set; }
 
         [NotMapped]
         public SelectList OccupationList { get; set; }
-        public string OccupationName { get; set; }
 
         [NotMapped]
         public SelectList QualificationList { get; set; }
-        public string QualificationName { get; set; }
-
+        
         [NotMapped]
-        public SelectList DisabilityList { get; set; }
-        public string DisabilityName { get; set; }
-
-        [NotMapped]
-        public SelectList HouseholdList { get; set; }
-        [DisplayName("Household Name")]
-        public string HouseholdName { get; set; }
+        public SelectList ConstituencyList { get; set; }
     }
 }
