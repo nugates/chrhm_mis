@@ -36,8 +36,8 @@ namespace SKMISApplication.Models
         public virtual DbSet<InventoryEntry> InventoryEntries { get; set; }
         public virtual DbSet<OccupationMaster> OccupationMasters { get; set; }
         public virtual DbSet<QualificationMaster> QualificationMasters { get; set; }
-        public virtual DbSet<VehicleEntry> VehicleEntries { get; set; }
         public virtual DbSet<VendorEntry> VendorEntries { get; set; }
         public virtual DbSet<WardMaster> WardMasters { get; set; }
+        public virtual DbSet<VehicleEntry> VehicleEntries { get; set; }
     }
 }

@@ -212,7 +212,6 @@
     <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\QualificationController.cs" />
     <Compile Include="Controllers\TaskActionResult.cs" />
-    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VendorEntryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1340,11 +1339,6 @@
     <Content Include="Views\Inventory\Details.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\Vehicle\Create.cshtml" />
-    <Content Include="Views\Vehicle\Delete.cshtml" />
-    <Content Include="Views\Vehicle\Details.cshtml" />
-    <Content Include="Views\Vehicle\Edit.cshtml" />
-    <Content Include="Views\Vehicle\Index.cshtml" />
     <Content Include="Views\Vendor\Create.cshtml" />
     <Content Include="Views\Vendor\Delete.cshtml" />
     <Content Include="Views\Vendor\Details.cshtml" />

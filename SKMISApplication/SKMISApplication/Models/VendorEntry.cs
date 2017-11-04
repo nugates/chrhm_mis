@@ -14,6 +14,12 @@ namespace SKMISApplication.Models
     
     public partial class VendorEntry
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public VendorEntry()
+        {
+            this.VehicleEntries = new HashSet<VehicleEntry>();
+        }
+    
         public long VendorId { get; set; }
         public string VendorName { get; set; }
         public string VendorAddress { get; set; }
@@ -32,5 +38,8 @@ namespace SKMISApplication.Models
         public string Email { get; set; }
         public string Website { get; set; }
         public string Misc { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VehicleEntry> VehicleEntries { get; set; }
     }
 }
