@@ -5,43 +5,46 @@
 }
 @using (Html.BeginForm())
 {
-<section class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Beneficiery Entry</h3>
-                    <div style="float: right;">
-                       @Html.ActionLink("Create New", "Create", "", htmlAttributes: new { @class = "btn btn-block btn-primary" })
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Beneficiery List</h3>
+                        <div style="float: right;">
+                            @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
+                            @Html.ActionLink("CREATE BENEFICIERY", "Create", "Beneficiary", new { @class = "btn btn-block btn-primary" })
+                        </div>
                     </div>
-                </div>
-                <div class="box-body">
-                    <table class="table table-bordered table-striped" id="beneficieryGrid">
-                        <thead>
-                            <tr>
-                                <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                                <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
-                                <th>@Html.DisplayNameFor(model => model.FatherOrMotherName)</th>
-                                <th>@Html.DisplayNameFor(model => model.Gender)</th>
-                                <th>@Html.DisplayNameFor(model => model.MobileNo)</th>
-                                <th>@Html.DisplayNameFor(model => model.Religion)</th>
-                                <th>@Html.DisplayNameFor(model => model.MaritialStatus)</th>
-                                <th>@Html.DisplayNameFor(model => model.WardName)</th>
-                                <th>@Html.DisplayNameFor(model => model.AadharNo)</th>
-                                <th>@Html.DisplayNameFor(model => model.EmploymentType)</th>
-                                <th>@Html.DisplayNameFor(model => model.CasteName)</th>
-                                <th>@Html.DisplayNameFor(model => model.QualificationName)</th>
-                                <th>@Html.DisplayNameFor(model => model.OccupationName)</th>
-                                <th>@Html.DisplayNameFor(model => model.AnnualIncome)</th>
-                                <th>Edit  </th>
-                                <th>Delete</th>
-                                <th>View Document</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped" id="beneficieryGrid">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.ConstituencyName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.WardName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                                    <th>@Html.DisplayNameFor(model => model.FatherOrMotherName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                                    <th>@Html.DisplayNameFor(model => model.MobileNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Religion)</th>
+                                    <th>@Html.DisplayNameFor(model => model.MaritialStatus)</th>
+                                    <th>@Html.DisplayNameFor(model => model.AadharNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.CasteName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.QualificationName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.OccupationName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.AnnualIncome)</th>
+                                    <th>Edit  </th>
+                                    <th>Delete</th>
+                                    <th>View Document</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
                             {
                                 <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ConstituencyName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.WardName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.FullName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
                                     <td>@Html.DisplayFor(modelItem => item.FatherOrMotherName)</td>
@@ -49,41 +52,32 @@
                                     <td>@Html.DisplayFor(modelItem => item.MobileNo)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Religion)</td>
                                     <td>@Html.DisplayFor(modelItem => item.MaritialStatus)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.WardName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.AadharNo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EmploymentType)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CasteName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.QualificationName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.OccupationName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.AnnualIncome)</td>
                                     <td>
-                                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block glyphicon glyphicon-edit bg-orange"})
+                                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
                                     </td>
                                     <td>
                                         @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-danger glyphicon glyphicon-trash" })*@
-                                        <a href="#" class="btn btn-block btn-danger glyphicon glyphicon-trash" data-toggle="modal"
-                                           onclick="deleteCitizen(@item.ID, '@item.FullName')"></a>
+                                        <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-toggle="modal"
+                                           onclick="deleteBeneficiary(@item.ID, '@item.FullName')"></a>
                                     </td>
                                     <td>
-                                        @Html.ActionLink(" ", "ViewDocument", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block glyphicon glyphicon-file  bg-green"})
+                                        @Html.ActionLink(" ", "ViewDocument", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-file" })
                                     </td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section>
+    </section>
 }
-<!-- /.content -->
-<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
-<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script>
     $(function () {
         //alert("sashg");
@@ -108,48 +102,39 @@
     //    $.getScript("http://" +$(location).attr('host')+"/plugins/datatables/dataTables.bootstrap.min.js");
     //    //return false;
     //});
-    function deleteCitizen(id, fullName) {
-
+    function deleteBeneficiary(id, aname) {
         swal({
             title: "Are you sure you want to delete?",
-            text: "ID : " + id + " Citizen Name: " + fullName,
+            text: "",
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#ff4444",
+            confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes",
-            cancelButtonText: "Cancel",
-            closeOnConfirm: true,
-            closeOnCancel: true
-            },
-            function ()
-            {
+            closeOnConfirm: true
+        },
+            function () {
                 var url = '@Url.Action("Delete")';
-                loadAjax(id, url);
+        loadAjax(id, url);
             });
-    }
+        return false;
+}
 
-
-    function loadAjax(id, url) {
-        $.ajax({
-            url: url,
-            type: 'GET',
-            cache: false,
-            data: { id: id },
-            success: function (result) {
-                //swal("fjhgfh", "bvnbvnbcbv", "success");
-                setTimeout(function () {
-                    swal({
-                        title: "Deleted!",
-                        text: "Item, deleted successfully...!",
-                        type: "success",
-                        showConfirmButton: false
-
-                    });
-                }, 1000);
-                setTimeout(function () {
-                location.reload();
-                }, 2000);
-            }
-        });
-    }
+function loadAjax(id, url) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        data: { id: id },
+        success: function (result) {
+            swal({
+                title: "Deleted Successfully...!",
+                text: "",
+                type: "success",
+                timer: 5000,
+                showConfirmButton: false
+            });
+            location.reload();
+        }
+    });
+}
 </script>

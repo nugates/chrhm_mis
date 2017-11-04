@@ -12,20 +12,15 @@ namespace SKMISApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstituencyMaster
+    public partial class DisabilityMaster
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConstituencyMaster()
-        {
-            this.BeneficiaryEntries = new HashSet<BeneficiaryEntry>();
-        }
-    
-        public int ID { get; set; }
-        public string Constituency { get; set; }
+        public long ID { get; set; }
+        public string DisabilityType { get; set; }
         public string Description { get; set; }
         public Nullable<bool> IsActive { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BeneficiaryEntry> BeneficiaryEntries { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
     }
 }

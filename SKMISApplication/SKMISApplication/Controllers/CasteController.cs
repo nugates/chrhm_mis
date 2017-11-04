@@ -10,25 +10,25 @@ using System.Web.Mvc;
 
 namespace SKMISApplication.Controllers
 {
-    public class ConstituencyController : Controller
+    public class CasteController : Controller
     {
         private SKMISEntities2 db = new SKMISEntities2();
         // GET: Constituency
         public ActionResult Index()
         {
-            ConstituencyModel _cEntry = new ConstituencyModel();
-            var result = (from ce in db.ConstituencyMasters                          
+            CasteMaster _cEntry = new CasteMaster();
+            var result = (from ce in db.CasteMasters
                           where ce.IsActive == true
                           select new
                           {
                               ID = ce.ID,
-                              Constituency = ce.Constituency,
-                              Description = ce.Description                              
+                              Caste = ce.CasteName,
+                              Description = ce.Description
                           }).ToList()
-                          .Select(d => new ConstituencyModel()
+                          .Select(d => new CasteModel()
                           {
                               ID = d.ID,
-                              Constituency = d.Constituency,
+                              Caste = d.Caste,
                               Description = d.Description
                           });
             return View(result.ToList());
@@ -40,19 +40,19 @@ namespace SKMISApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(ConstituencyModel constituencyEntry)
+        public async Task<ActionResult> Create(CasteModel casteEntry)
         {
-            ConstituencyMaster _cEntry = new ConstituencyMaster();
+            CasteMaster _cEntry = new CasteMaster();
             if (ModelState.IsValid)
             {
-                _cEntry.Constituency = constituencyEntry.Constituency;
-                _cEntry.Description = constituencyEntry.Description;                
+                _cEntry.CasteName = casteEntry.Caste;
+                _cEntry.Description = casteEntry.Description;
                 _cEntry.IsActive = true;
-                db.ConstituencyMasters.Add(_cEntry);
+                db.CasteMasters.Add(_cEntry);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(constituencyEntry);
+            return View(casteEntry);
         }
 
         public async Task<ActionResult> Edit(long? id)
@@ -61,20 +61,19 @@ namespace SKMISApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            ConstituencyModel _cEntry = new ConstituencyModel();
-            var result = (from ce in db.ConstituencyMasters 
+            CasteModel _cEntry = new CasteModel();
+            var result = (from ce in db.CasteMasters
                           where ce.IsActive == true && ce.ID == id
                           select new
                           {
                               ID = ce.ID,
-                              Constituency = ce.Constituency,
-                              Description = ce.Description                              
+                              CasteName = ce.CasteName,
+                              Description = ce.Description
                           }).ToList()
-             .Select(d => new ConstituencyModel()
+             .Select(d => new CasteModel()
              {
                  ID = d.ID,
-                 Constituency = d.Constituency,
+                 Caste = d.CasteName,
                  Description = d.Description
              });
             _cEntry = result.FirstOrDefault();
@@ -87,14 +86,14 @@ namespace SKMISApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ConstituencyModel constituencyEntry)
+        public async Task<ActionResult> Edit(CasteModel casteEntry)
         {
             if (ModelState.IsValid)
             {
-                ConstituencyMaster _pDetail = await db.ConstituencyMasters.FindAsync(constituencyEntry.ID);
-                _pDetail.ID = constituencyEntry.ID;
-                _pDetail.Constituency = constituencyEntry.Constituency;
-                _pDetail.Description = constituencyEntry.Description;
+                CasteMaster _pDetail = await db.CasteMasters.FindAsync(casteEntry.ID);
+                _pDetail.ID = casteEntry.ID;
+                _pDetail.CasteName = casteEntry.Caste;
+                _pDetail.Description = casteEntry.Description;
                 _pDetail.IsActive = true;
                 db.Entry(_pDetail).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -109,9 +108,10 @@ namespace SKMISApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ConstituencyMaster _cEntry = await db.ConstituencyMasters.FindAsync(id);
-            _cEntry.ID = (int)id;
+            CasteMaster _cEntry = await db.CasteMasters.FindAsync(id);
+            _cEntry.ID = (long)id;
             _cEntry.IsActive = false;
+            _cEntry.UpdatedDate = DateTime.Now;
             db.Entry(_cEntry).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

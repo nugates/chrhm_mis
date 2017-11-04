@@ -22,12 +22,20 @@ CREATE TABLE [dbo].[BeneficiaryEntry](
 	[CreatedBy] [int] NULL,
 	[UpdatedDate] [datetime] NULL,
 	[UpdatedBy] [int] NULL,
+	[ConstituencyID] [int] NULL,
  CONSTRAINT [PK_BeneficiaryEntry_1] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+ALTER TABLE [dbo].[BeneficiaryEntry]  WITH CHECK ADD  CONSTRAINT [FK_BeneficiaryEntry_ConstituencyMaster] FOREIGN KEY([ConstituencyID])
+REFERENCES [dbo].[ConstituencyMaster] ([ID])
+GO
+
+ALTER TABLE [dbo].[BeneficiaryEntry] CHECK CONSTRAINT [FK_BeneficiaryEntry_ConstituencyMaster]
 GO
 
 

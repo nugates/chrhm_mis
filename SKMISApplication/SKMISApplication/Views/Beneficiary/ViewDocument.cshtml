@@ -39,10 +39,10 @@
                                         @Html.DisplayFor(modelItem => item.DocumentName)
                                     </td>
                                     <td>
-                                        @Html.ActionLink(" ", "Download", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-success glyphicon glyphicon-download" })
+                                        @Html.ActionLink(" ", "Download", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-download" })
                                     </td>
                                     <td>
-                                        <button type="button" onclick="previewImg('@item.FileLocation.Replace("~", "")')" value="" class="btn btn-block btn-primary glyphicon glyphicon-eye-open"/>
+                                        <button type="button" onclick="previewImg('@item.FileLocation.Replace("~", "")')" value="" class="btn btn-default btn-sm glyphicon glyphicon-eye-open"/>
                                         @*@Html.Action(new { id = item.FileLocation.Replace("~/","") }, htmlAttributes: new { @class = "btn btn-block bg-orange glyphicon glyphicon-edit",  style = "target:_blank",})*@
                                     </td>
                                 </tr>

@@ -69,17 +69,21 @@ namespace SKMISApplication.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(DriverEntryModel driverEntry)
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(HttpPostedFileBase file, DriverEntryModel driverEntry)
         {
             if (ModelState.IsValid)
             {
+                string datetime = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string dbSavePath = "~/Images/" + datetime + file.FileName;
+                string path = Server.MapPath(dbSavePath);
+
                 DriverEntry _dEntry = new DriverEntry();
                 _dEntry.DriverName = driverEntry.DriverName;
                 _dEntry.DriverContactNumber = driverEntry.DriverContactNumber;
                 _dEntry.WorkContactNumber = driverEntry.WorkContactNumber;
                 _dEntry.EmailID = driverEntry.EmailID;
-                _dEntry.ImagePath = driverEntry.ImagePath;
+                _dEntry.ImagePath = dbSavePath;
                 _dEntry.LicenseNo = driverEntry.LicenseNo;
                 _dEntry.LicenseExpiryDate = driverEntry.LicenseExpiryDate;
                 _dEntry.LicenseState = driverEntry.LicenseState;
@@ -93,6 +97,7 @@ namespace SKMISApplication.Controllers
                 _dEntry.CreatedDate = DateTime.Now;
                 db.DriverEntries.Add(_dEntry);
                 await db.SaveChangesAsync();
+                file.SaveAs(path);
                 return RedirectToAction("Index");
             }
             return View(driverEntry);

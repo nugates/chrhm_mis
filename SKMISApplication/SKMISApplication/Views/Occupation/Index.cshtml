@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SKMISApplication.Models.ConstituencyModel>
+﻿@model IEnumerable<SKMISApplication.Models.OccupationModel>
 
 @{
     ViewBag.Title = "Index";
@@ -10,17 +10,17 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Constituency List</h3>
+                        <h3 class="box-title">Occupation List</h3>
                         <div style="float: right;">
                             @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
-                            @Html.ActionLink("CREATE NEW", "Create", "Constituency", new { @class = "btn btn-block btn-primary" })
+                            @Html.ActionLink("CREATE NEW", "Create", "Occupation", new { @class = "btn btn-block btn-primary" })
                         </div>
                     </div>
                     <div class="box-body">
-                        <table class="table table-bordered table-striped" id="constituencyGrid">
+                        <table class="table table-bordered table-striped" id="occupationGrid">
                             <thead>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(model => model.Constituency)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Occupation)</th>
                                     <th>@Html.DisplayNameFor(model => model.Description)</th>
                                     <th>Edit  </th>
                                     <th>Delete</th>
@@ -29,17 +29,17 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Constituency)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td>
-                                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
-                                    </td>
-                                    <td>
-                                        @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-danger glyphicon glyphicon-trash" })*@
-                                        <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-toggle="modal" onclick="deleteConstituency(@item.ID)"></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Occupation)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td>
+                                            @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-danger glyphicon glyphicon-trash" })*@
+                                            <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-toggle="modal" onclick="deleteOccupation(@item.ID)"></a>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -55,7 +55,7 @@
 <script>
     $(function () {
         //alert("sashg");
-        $("#constituencyGrid").DataTable({
+        $("#occupationGrid").DataTable({
             "sScrollX": "99.8%"
         });
         //$('#example1').DataTable({
@@ -76,7 +76,7 @@
     //    $.getScript("http://" +$(location).attr('host')+"/plugins/datatables/dataTables.bootstrap.min.js");
     //    //return false;
     //});
-    function deleteConstituency(id) {
+    function deleteOccupation(id) {
         swal({
             title: "Are you sure you want to delete?",
             text: "",
@@ -84,7 +84,7 @@
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes",
-            closeOnConfirm: true
+            closeOnConfirm: false
         },
             function () {
                 var url = '@Url.Action("Delete")';
@@ -100,14 +100,15 @@ function loadAjax(id, url) {
         cache: false,
         data: { id: id },
         success: function (result) {
-                swal({
-                    title: "Deleted Successfully...!",
-                    text: "",
-                    type: "success",
-                    timer: 5000,                    
-                    showConfirmButton: false
-                });            
-                location.reload();            
+            swal({
+                title: "Deleted Successfully...!",
+                text: "",
+                type: "success",
+                timer: 5000,
+                showConfirmButton: true
+            });
+            location.reload();
+           
         }
     });
 }

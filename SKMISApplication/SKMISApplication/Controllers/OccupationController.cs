@@ -10,25 +10,24 @@ using System.Web.Mvc;
 
 namespace SKMISApplication.Controllers
 {
-    public class ConstituencyController : Controller
+    public class OccupationController : Controller
     {
         private SKMISEntities2 db = new SKMISEntities2();
         // GET: Constituency
         public ActionResult Index()
         {
-            ConstituencyModel _cEntry = new ConstituencyModel();
-            var result = (from ce in db.ConstituencyMasters                          
+            var result = (from ce in db.OccupationMasters
                           where ce.IsActive == true
                           select new
                           {
                               ID = ce.ID,
-                              Constituency = ce.Constituency,
-                              Description = ce.Description                              
+                              Occupation = ce.OccupationTitle,
+                              Description = ce.Description
                           }).ToList()
-                          .Select(d => new ConstituencyModel()
+                          .Select(d => new OccupationModel()
                           {
                               ID = d.ID,
-                              Constituency = d.Constituency,
+                              Occupation = d.Occupation,
                               Description = d.Description
                           });
             return View(result.ToList());
@@ -40,19 +39,19 @@ namespace SKMISApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(ConstituencyModel constituencyEntry)
+        public async Task<ActionResult> Create(OccupationModel occupationEntry)
         {
-            ConstituencyMaster _cEntry = new ConstituencyMaster();
+            OccupationMaster _cEntry = new OccupationMaster();
             if (ModelState.IsValid)
             {
-                _cEntry.Constituency = constituencyEntry.Constituency;
-                _cEntry.Description = constituencyEntry.Description;                
+                _cEntry.OccupationTitle = occupationEntry.Occupation;
+                _cEntry.Description = occupationEntry.Description;
                 _cEntry.IsActive = true;
-                db.ConstituencyMasters.Add(_cEntry);
+                db.OccupationMasters.Add(_cEntry);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(constituencyEntry);
+            return View(occupationEntry);
         }
 
         public async Task<ActionResult> Edit(long? id)
@@ -61,20 +60,19 @@ namespace SKMISApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            ConstituencyModel _cEntry = new ConstituencyModel();
-            var result = (from ce in db.ConstituencyMasters 
+            OccupationModel _cEntry = new OccupationModel();
+            var result = (from ce in db.OccupationMasters
                           where ce.IsActive == true && ce.ID == id
                           select new
                           {
                               ID = ce.ID,
-                              Constituency = ce.Constituency,
-                              Description = ce.Description                              
+                              Occupation = ce.OccupationTitle,
+                              Description = ce.Description
                           }).ToList()
-             .Select(d => new ConstituencyModel()
+             .Select(d => new OccupationModel()
              {
                  ID = d.ID,
-                 Constituency = d.Constituency,
+                 Occupation = d.Occupation,
                  Description = d.Description
              });
             _cEntry = result.FirstOrDefault();
@@ -87,14 +85,14 @@ namespace SKMISApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ConstituencyModel constituencyEntry)
+        public async Task<ActionResult> Edit(OccupationModel occupationEntry)
         {
             if (ModelState.IsValid)
             {
-                ConstituencyMaster _pDetail = await db.ConstituencyMasters.FindAsync(constituencyEntry.ID);
-                _pDetail.ID = constituencyEntry.ID;
-                _pDetail.Constituency = constituencyEntry.Constituency;
-                _pDetail.Description = constituencyEntry.Description;
+                OccupationMaster _pDetail = await db.OccupationMasters.FindAsync(occupationEntry.ID);
+                _pDetail.ID = occupationEntry.ID;
+                _pDetail.OccupationTitle = occupationEntry.Occupation;
+                _pDetail.Description = occupationEntry.Description;
                 _pDetail.IsActive = true;
                 db.Entry(_pDetail).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -109,7 +107,7 @@ namespace SKMISApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ConstituencyMaster _cEntry = await db.ConstituencyMasters.FindAsync(id);
+            OccupationMaster _cEntry = await db.OccupationMasters.FindAsync(id);
             _cEntry.ID = (int)id;
             _cEntry.IsActive = false;
             db.Entry(_cEntry).State = EntityState.Modified;
