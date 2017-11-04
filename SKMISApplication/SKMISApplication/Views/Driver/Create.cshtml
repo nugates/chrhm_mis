@@ -12,8 +12,7 @@
     });
 
 </script>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Driver", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <section class="content">
         <div class="row">
@@ -25,8 +24,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         @Html.AntiForgeryToken()
-
-
+                        
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -76,15 +74,30 @@
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <div class="form-group" style="padding-top: 5px;">
+                                    @*<div class="form-group" style="padding-top: 5px;">
                                         @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-3" })
                                         <div class="col-md-9">
                                             @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
                                         </div>
+                                    </div>*@
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-3">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    Browse… <input type="file" name="file" id="imgInp" />
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="img-name" class="form-control" readonly>
+                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
-
+                                    <div class="form-group" style="padding-top: 5px;">
+                                        <img id='img-upload' height="100" />
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group" style="padding-top: 5px;">
@@ -182,8 +195,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -195,3 +206,84 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    #img-upload {
+        float:right;
+        width: 150px;
+        margin-right:20px;
+    }
+
+    #img-uploadgrid {
+        width: 20%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        function readURL(input) {
+            var extension = input.files[0].name.substr((input.files[0].name.lastIndexOf('.') + 1));
+            var size = input.files[0].size / 1024;
+            $('#img-name').val(input.files[0].name);
+            if (extension == "png" || "jpeg") {
+                if (size <= 300) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img-upload').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+
+                    $(document).on('change', '.btn-file :file', function () {
+                        var input = $(this),
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                    });
+
+                    $('.btn-file :file').on('fileselect', function (event, label) {
+                        var input = $(this).parents('.input-group').find(':text'),
+                            log = label;
+                        if (input.length) {
+                            input.val(log);
+                        } else {
+                            if (log);
+                        }
+                    });
+                }
+                else {
+                    alert("exceed file size");
+                    $("#imgInp")[0].value = "";
+                }
+            }
+            else {
+                alert("please enter files with format: ")
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    });
+</script>

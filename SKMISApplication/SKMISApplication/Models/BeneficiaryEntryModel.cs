@@ -14,7 +14,7 @@ namespace SKMISApplication.Models
         public long BeneficiaryId { get; set; }
         //[Required]
         public string BeneficiaryName { get; set; }
-        public string ConstituencyName { get; set; }
+        public string ConstituencyName1 { get; set; }
         public string VillageName { get; set; }
         public int? WardNo { get; set; }
         public int? HouseNo { get; set; }
@@ -46,10 +46,6 @@ namespace SKMISApplication.Models
 
         //[Required]
         public string Category { get; set; }
-
-        //[Required]
-        [DisplayName("Employment Type")]
-        public string EmploymentType { get; set; }
         
         //[Required]
         [DisplayName("Aadhar No")]
@@ -96,6 +92,9 @@ namespace SKMISApplication.Models
 
         [DisplayName("Occupation")]
         public string OccupationName { get; set; }
+
+        [DisplayName("Constituency")]
+        public string ConstituencyName { get; set; }
 
 
         [NotMapped]

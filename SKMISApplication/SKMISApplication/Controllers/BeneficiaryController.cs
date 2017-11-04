@@ -32,14 +32,14 @@ namespace SKMISApplication.Controllers
                               MobileNo = ce.MobileNo,
                               Religion = ce.Religion,
                               WardName = wm.WardName,
-                              EmploymentType = ce.EmploymentType,
                               AadharNo = ce.AadharNo,
                               Gender = ce.Gender,
                               MaritialStatus = ce.MaritialStatus,
                               CasteName = cm.CasteName,
                               QualificationName = qm.QualificationName,
                               OccupationTitle = om.OccupationTitle,
-                              AnnualIncome = ce.AnnualIncome
+                              AnnualIncome = ce.AnnualIncome,
+                              ConstituencyName = ce.ConstituencyMaster.Constituency
                           }).ToList()
                           .Select(d => new BeneficiaryEntryModel()
                           {
@@ -50,14 +50,14 @@ namespace SKMISApplication.Controllers
                               MobileNo = d.MobileNo,
                               Religion = d.Religion,
                               WardName = d.WardName,
-                              EmploymentType = d.EmploymentType,
                               AadharNo = d.AadharNo,
                               Gender = d.Gender,
                               MaritialStatus = d.MaritialStatus,
                               CasteName = d.CasteName,
                               QualificationName = d.QualificationName,
                               OccupationName = d.OccupationTitle,
-                              AnnualIncome = d.AnnualIncome
+                              AnnualIncome = d.AnnualIncome,
+                              ConstituencyName = d.ConstituencyName
                           });
             return View(result.ToList());
         }
@@ -84,7 +84,6 @@ namespace SKMISApplication.Controllers
                 _cEntry.FatherOrMotherName = beneficiaryEntry.FatherOrMotherName;
                 _cEntry.MobileNo = beneficiaryEntry.MobileNo;
                 _cEntry.Religion = beneficiaryEntry.Religion;
-                _cEntry.EmploymentType = beneficiaryEntry.EmploymentType;
                 _cEntry.WardID = beneficiaryEntry.WardID;
                 _cEntry.AadharNo = beneficiaryEntry.AadharNo;
                 _cEntry.Gender = beneficiaryEntry.Gender;
@@ -94,6 +93,7 @@ namespace SKMISApplication.Controllers
                 _cEntry.Occupation = beneficiaryEntry.OccupationID;
                 _cEntry.AnnualIncome = beneficiaryEntry.AnnualIncome;
                 _cEntry.Category = beneficiaryEntry.Category;
+                _cEntry.ConstituencyID = beneficiaryEntry.ConstituencyID;
                 _cEntry.IsActive = true;
                 _cEntry.CreatedDate = DateTime.Now;
                 db.BeneficiaryEntries.Add(_cEntry);
@@ -104,6 +104,7 @@ namespace SKMISApplication.Controllers
             beneficiaryEntry.CasteList = new SelectList(ListFillerCaste(), "ID", "CasteName");
             beneficiaryEntry.OccupationList = new SelectList(ListFillerOccupation(), "ID", "OccupationTitle");
             beneficiaryEntry.QualificationList = new SelectList(ListFillerQualification(), "ID", "QualificationName");
+            beneficiaryEntry.ConstituencyList = new SelectList(ListFillerConstituency(), "ID", "ConstituencyName");
             return View(beneficiaryEntry);
         }
 
@@ -156,7 +157,6 @@ namespace SKMISApplication.Controllers
                               Gender = ce.Gender,
                               MobileNo = ce.MobileNo,
                               Religion = ce.Religion,
-                              EmploymentType = ce.EmploymentType,
                               MaritialStatus = ce.MaritialStatus,
                               WardID = ce.WardID,
                               AadharNo = ce.AadharNo,
@@ -164,7 +164,8 @@ namespace SKMISApplication.Controllers
                               Category = ce.Category,
                               Caste = ce.Caste,
                               Qualification = ce.Qualification,
-                              Occupation = ce.Occupation
+                              Occupation = ce.Occupation,
+                              ConstituencyID = ce.ConstituencyID
                           }).ToList()
              .Select(d => new BeneficiaryEntryModel()
              {
@@ -175,7 +176,6 @@ namespace SKMISApplication.Controllers
                  Gender = d.Gender,
                  MobileNo = d.MobileNo,
                  Religion = d.Religion,
-                 EmploymentType = d.EmploymentType,
                  WardID = d.WardID,
                  AadharNo = d.AadharNo,
                  AnnualIncome = d.AnnualIncome,
@@ -183,14 +183,15 @@ namespace SKMISApplication.Controllers
                  Category = d.Category,
                  CasteID = d.Caste,
                  QualificationID = d.Qualification,
-                 OccupationID = d.Occupation
+                 OccupationID = d.Occupation,
+                 ConstituencyID = d.ConstituencyID
              });
             _cEntry = result.FirstOrDefault();
             _cEntry.WardList = new SelectList(ListFillerWard(), "ID", "WardName");
             _cEntry.CasteList = new SelectList(ListFillerCaste(), "ID", "CasteName");
             _cEntry.OccupationList = new SelectList(ListFillerOccupation(), "ID", "OccupationTitle");
             _cEntry.QualificationList = new SelectList(ListFillerQualification(), "ID", "QualificationName");
-
+            _cEntry.ConstituencyList = new SelectList(ListFillerConstituency(), "ID", "ConstituencyName");
             if (_cEntry == null)
             {
                 return HttpNotFound();
@@ -212,7 +213,6 @@ namespace SKMISApplication.Controllers
                 _pDetail.Gender = beneficiaryEntry.Gender;
                 _pDetail.MobileNo = beneficiaryEntry.MobileNo;
                 _pDetail.Religion = beneficiaryEntry.Religion;
-                _pDetail.EmploymentType = beneficiaryEntry.EmploymentType;
                 _pDetail.WardID = beneficiaryEntry.WardID;
                 _pDetail.AadharNo = beneficiaryEntry.AadharNo;
                 _pDetail.Caste = beneficiaryEntry.CasteID;
@@ -220,6 +220,7 @@ namespace SKMISApplication.Controllers
                 _pDetail.Occupation = beneficiaryEntry.OccupationID;
                 _pDetail.AnnualIncome = beneficiaryEntry.AnnualIncome;
                 _pDetail.Category = beneficiaryEntry.Category;
+                _pDetail.ConstituencyID = beneficiaryEntry.ConstituencyID;
                 _pDetail.IsActive = true;
                 _pDetail.UpdatedDate = DateTime.Now;
                 _pDetail.UpdatedBy = 0;
@@ -252,6 +253,23 @@ namespace SKMISApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             BeneficiaryDocumentModel cdm = new BeneficiaryDocumentModel();
+            IEnumerable<BeneficiaryDocumentModel> result = GetBeneficiaryDocument(id);
+            SetViewDataBeneficiaryDocument(id);
+            return View(result.ToList());
+        }
+
+        private void SetViewDataBeneficiaryDocument(long? id)
+        {
+            var BeneficiaryName = (from ce in db.BeneficiaryEntries
+                                   where ce.IsActive == true && ce.ID == id
+                                   select ce).ToList();
+
+            ViewData["BeneficiaryName"] = BeneficiaryName.Select(a => a.FullName).FirstOrDefault();
+            ViewData["BeneficiaryID"] = id;
+        }
+
+        private IEnumerable<BeneficiaryDocumentModel> GetBeneficiaryDocument(long? id)
+        {
             var result = (from ce in db.BeneficiaryDocuments
                           where ce.IsActive == true && ce.BeneficiaryID == id
                           select new
@@ -262,25 +280,64 @@ namespace SKMISApplication.Controllers
                               DocumentNameGrid = ce.DocumentName,
                               FileLocation = ce.FileLocation
                           }).ToList()
-                          .Select(d => new BeneficiaryDocumentModel()
-                          {
-                              BeneficiaryID = d.BeneficiaryID,
-                              ID = d.ID,
-                              BeneficiaryName = d.BeneficiaryName,
-                              DocumentNameGrid = d.DocumentNameGrid,
-                              FileLocation = d.FileLocation
-                              //DocList = new SelectList(db.DocumentTitleMasters.Select(a => new { ID = a.ID, DocumentTitle = a.DocumentTitle }).ToList(), "ID", "DocumentTitle"),
-                              //NameList = new SelectList(db.CitizenEntries.Select(a => new { ID = a.ID, CitizenNames = a.FullName }).ToList(), "ID", "CitizenNames")
-                          });
+                                      .Select(d => new BeneficiaryDocumentModel()
+                                      {
+                                          BeneficiaryID = d.BeneficiaryID,
+                                          ID = d.ID,
+                                          BeneficiaryName = d.BeneficiaryName,
+                                          DocumentNameGrid = d.DocumentNameGrid,
+                                          FileLocation = d.FileLocation
+                                          //DocList = new SelectList(db.DocumentTitleMasters.Select(a => new { ID = a.ID, DocumentTitle = a.DocumentTitle }).ToList(), "ID", "DocumentTitle"),
+                                          //NameList = new SelectList(db.CitizenEntries.Select(a => new { ID = a.ID, CitizenNames = a.FullName }).ToList(), "ID", "CitizenNames")
+                                      });
+            return result;
+        }
 
-            var BeneficiaryName = (from ce in db.BeneficiaryEntries
-                          where ce.IsActive == true && ce.ID == id
-                          select ce).ToList();
+        [HttpPost]
+        public async Task<ActionResult> DocumentEntry(HttpPostedFileBase file, BeneficiaryDocumentModel _beneficiaryDocuments)
+        {
+                string datetime = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string dbSavePath = "~/Images/" + datetime + file.FileName;
+                string path = Server.MapPath(dbSavePath);
+                BeneficiaryDocument _cDocument = new BeneficiaryDocument();
+                _cDocument.FileLocation = dbSavePath;
+                _cDocument.BeneficiaryID = _beneficiaryDocuments.ID;
+                _cDocument.DocumentName = _beneficiaryDocuments.DocumentName;
+                _cDocument.CreatedDate = DateTime.Now;
+                _cDocument.IsActive = true;
+                file.SaveAs(path);
+                db.BeneficiaryDocuments.Add(_cDocument);
+                //ViewBag.Path = path;
+                await db.SaveChangesAsync();
 
-            ViewData["BeneficiaryName"] = BeneficiaryName.Select(a => a.FullName).FirstOrDefault();
-            ViewData["BeneficiaryID"] = id;
-            //ViewData["BeneficiaryNameList"] = new SelectList(db.BeneficiaryEntries.Select(a => new { ID = a.ID, BeneficiaryNames = a.FullName }).ToList(), "ID", "BeneficiaryNames");
+            IEnumerable<BeneficiaryDocumentModel> result = GetBeneficiaryDocument(_beneficiaryDocuments.ID);
 
+            SetViewDataBeneficiaryDocument(_beneficiaryDocuments.ID);
+            return View(result.ToList());
+        }
+
+        public async Task<ActionResult> Download(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var fPath = db.BeneficiaryDocuments.Single(a => a.ID == id).FileLocation;
+            var beneficiaryID = db.BeneficiaryDocuments.Single(a => a.ID == id).BeneficiaryID;
+            WebClient req = new WebClient();
+            HttpResponse response = System.Web.HttpContext.Current.Response;
+            response.Clear();
+            response.ClearContent();
+            response.ClearHeaders();
+            response.Buffer = true;
+            response.AddHeader("Content-Disposition", "attachment;filename=\"" + Server.MapPath(fPath) + "\"");
+            byte[] data = req.DownloadData(Server.MapPath(fPath));
+            response.BinaryWrite(data);
+            response.End();
+
+            IEnumerable<BeneficiaryDocumentModel> result = GetBeneficiaryDocument(beneficiaryID);
+
+            SetViewDataBeneficiaryDocument(beneficiaryID);
             return View(result.ToList());
         }
 

@@ -202,12 +202,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeneficiaryController.cs" />
     <Compile Include="Controllers\BeneficiaryDocumentEntryController.cs" />
+    <Compile Include="Controllers\CasteController.cs" />
     <Compile Include="Controllers\ConstituencyController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OccupationController.cs" />
+    <Compile Include="Controllers\QualificationController.cs" />
     <Compile Include="Controllers\TaskActionResult.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VendorEntryController.cs" />
@@ -223,13 +226,20 @@
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeneficiaryEntryModel.cs" />
+    <Compile Include="Models\BeneficiaryEntry_old.cs">
+      <DependentUpon>SKMIS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CasteMaster.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CasteModel.cs" />
     <Compile Include="Models\ConstituencyMaster.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConstituencyModel.cs" />
+    <Compile Include="Models\DisabilityMaster.cs">
+      <DependentUpon>SKMIS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DriverEntry.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
@@ -248,9 +258,11 @@
     <Compile Include="Models\OccupationMaster.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OccupationModel.cs" />
     <Compile Include="Models\QualificationMaster.cs">
       <DependentUpon>SKMIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QualificationModel.cs" />
     <Compile Include="Models\SKMIS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1334,8 +1346,6 @@
     <Content Include="Views\Vendor\Edit.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Beneficiary\Create.cshtml" />
-    <Content Include="Views\Beneficiary\Delete.cshtml" />
-    <Content Include="Views\Beneficiary\Details.cshtml" />
     <Content Include="Views\Beneficiary\Edit.cshtml" />
     <Content Include="Views\Beneficiary\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
@@ -1352,17 +1362,13 @@
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Beneficiary\DocumentEntry.cshtml" />
     <Content Include="Views\Beneficiary\ViewDocument.cshtml" />
-    <Content Include="Views\Vehicle\Create.cshtml" />
-    <Content Include="Views\Vehicle\Delete.cshtml" />
-    <Content Include="Views\Vehicle\Details.cshtml" />
-    <Content Include="Views\Vehicle\Edit.cshtml" />
-    <Content Include="Views\Vehicle\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="build\bootstrap-less\mixins\" />
     <Folder Include="build\less\skins\" />
     <Folder Include="documentation\build\include\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
