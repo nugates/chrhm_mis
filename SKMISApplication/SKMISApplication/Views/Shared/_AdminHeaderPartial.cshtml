@@ -1,0 +1,165 @@
+﻿<header class="main-header">
+    <a href="@Url.Action("Dashboard", "Login")" class="logo">
+        <span class="logo-mini"><b>MIS</b></span>
+        <span class="logo-lg"><b>CMRHM</b></span>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <table style="width:100%">
+            <tr>
+                <td style="width:90%">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </td>
+                @*<td>
+                    <div class="navbar-custom-menu">
+                        <button id="btnShowModal" type="button"
+                                class="fa fa-exchange">
+                            Sync
+                        </button>
+                    </div>
+                </td>*@
+                <td>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="~/dist/img/Trucking_Logo.jpg" class="user-image" alt="User Image" id="CompanyLogo1">
+                                    <span class="hidden-xs" id="loginUser1"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <img src="~/dist/img/Trucking_Logo.jpg" id="CompanyLogo" class="img-circle" alt="User Image">
+                                        <p>
+                                            <span id="loginUser"></span>
+                                            <small>Member of CMRHM</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="@Url.Action("Index", "Login")" class="btn btn-default btn-flat">Sign out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+    </nav>
+</header>
+<div>
+    <fieldset>
+        <div class="modal fade" tabindex="-1" id="popupModal"
+             data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="width:50%;">
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dismiss="modal">
+                                ×
+                            </button>*@
+                        <h4 class="modal-title">Sync</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <a href="#" class="btn btn-default" style="height:50px; width:250px; font-size:16px;text-align: center;vertical-align: middle;line-height: 30px; margin-left:20%" data-toggle="modal" onclick="showpopupsync()">Start Sync</a>
+                            @*<div class="form-group">
+                                    <input class="form-control" type="text"
+                                           placeholder="Login Username" id="inputUserName" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Login Password"
+                                           type="password" id="inputPassword" />
+                                </div>*@
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnHideModal" class="btn btn-primary button button4">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnShowModal").click(function () {
+            $("#popupModal").modal('show');
+        });
+
+        $("#btnHideModal").click(function () {
+            $("#popupModal").modal('hide');
+        });
+    });
+
+    function showpopupsync(id) {
+        $('button').prop('disabled', true);
+        $('#btnShowModal').prop('disabled', true);
+        @*$.ajax({
+            url: '@Url.Action("SysnStart", "Home")',
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                alert(123);
+                $.each(result, function (i, item) {
+
+                });
+
+            }
+        });*@
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SysnStart", "Home")',
+            dataType: 'json',
+            success: function (result) {
+                if (result == "success") {
+                    swal({
+                        title: "data sync successfully to local and cloud...!",
+                        text: "",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                }
+                else if (result == "error") {
+                    swal({
+                        title: "please check you internet connection..!",
+                        text: "",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                }
+                else if (result == "ex") {
+                    swal({
+                        title: "some problem occured, please contact admin/devs..!",
+                        text: "",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                }
+
+            }
+        });
+        $('button').prop('disabled', false);
+        $('#btnShowModal').prop('disabled', false);
+        return false;
+    }
+</script>

@@ -1,0 +1,249 @@
+﻿@model SKMISApplication.Models.ItemAllocationModel
+@{
+    ViewBag.Title = "E.Store";
+}
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">E. Store</h3>
+                        <div style="float: right;">
+                            @Html.ActionLink("Back", "Create", "ItemAllocation", htmlAttributes: new { @class = "btn btn-block btn-primary" })
+                        </div>
+                    </div>
+                    <table style="margin-left:10px; width:70%">
+                        <tr>
+                            <td>
+                               <span style="font-weight:bold">Form ID </span> 
+                            </td>
+                            <td style="margin-left:10px" >
+                                @Html.EditorFor(model => model.FormID, new { htmlAttributes = new { @class = "form-control", @id = "formid", @readonly = "readonly" } })
+                            </td>
+                            <td style="margin-left:10px">
+                                <span style="font-weight:bold; margin-left:20px;">Beneficiary</span> 
+                            </td>
+                            <td >
+                                @Html.EditorFor(model => model.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ConstituencyID, htmlAttributes: new { @class = "control-label col-md-4", @id = "cid" })
+                        @Html.HiddenFor(model => model.BeneficiaryID, htmlAttributes: new { @class = "control-label col-md-4", @id = "bid" })
+                        <div class="header-div">
+                            <div class="form-horizontal">
+                                <div class="overlay">
+                                    <table id="example" style="margin-top:10px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%"></th>
+                                                <th style="width: 5%; display:none">ID</th>
+                                                <th style="width: 30%">Item Name</th>
+                                                <th style="width: 30%">Total Qty.</th>
+                                                <th style="width: 30%">Due Qty.</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    $(function () {
+        $('#datepicker').datepicker({
+            autoclose: true
+        });
+
+    });
+    function loadAjax() {
+        
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadAllocationTableEstoreView")',
+            dataType: 'json',
+            data: { cid: $('#cid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                var data = '';
+                data = result;
+
+                console.log(data);
+                var table = $('#example').DataTable({
+                    "data": data.data,
+                    "columns": [
+                        {
+                            "className": 'details-control',
+                            "orderable": false,
+                            "data": null,
+                            "defaultContent": ''
+                        },
+                        { "className": 'dontshow', "data": "ItemID" },
+                        { "data": "ItemName" },
+                        { "data": "TotalQty" },
+                        { "data": "QtyDue" }
+                    ]
+                });
+
+
+                $('#example tbody').on('click', 'td.details-control', function () {
+
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if (row.child.isShown()) {
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        var itemid = $(this).closest('tr').children('td:nth-child(2)').text();
+                        var cid = $('#cid').val();
+                        var bid = $('#bid').val();
+                        var tableshow = format(itemid, cid, bid);
+
+                        setTimeout(function () {
+                            row.child(TblData).show();
+                            tr.addClass('shown');
+                        }, 400)
+                    }
+                });
+                $("#quanity").val(0)
+            }
+        });
+    }
+
+    function format(item_id, c_id, b_id) {
+
+        var table = '<table id="example1" class="table" style="font-family:Arial,sans-serif;border-collapse:collapse;width:90%;float:right;">';
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadAllocationTableChild")',
+            dataType: 'json',
+            data: { itemid: item_id, cid: c_id, bid: b_id },
+            success: function (result) {
+                table = table + '<thead><tr style="background-color:#B0BED9"><th style="font-size:10px;">QUANTITY</th><th style="font-size:10px;">ISSUE DATE</th><th></th> </tr></thead> <tbody>';
+
+                $.each(result.data, function (i, item) {
+                    var date = new Date(parseInt(item.issuedateView.substr(6)));
+                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                    table = table + " <tr><td style='font-size:10px;'>" + item.ViewQuantity + "</td><td style='font-size:10px;'>" + displayDate + "</td><td><a href='#' class='btn btn-default btn-sm glyphicon glyphicon-trash' data-toggle='modal' onclick='deleteitem(" + item.ID + ")'></a></td></tr>"
+                });
+                TblData = (table + '</tbody></table>');
+            }
+        });
+    }
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "sScrollX": "99.8%"
+        });
+    }
+
+    $(document).ready(function () {
+        //jQuery("label[for='dts']").html(");
+        loadAjax();
+    });
+
+    function Checklimit() {
+        //alert("wooo");
+        ChecklimitAjax();
+    }
+    function ChecklimitAjax(val) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CheckLimit")',
+            dataType: 'json',
+            data: { itemid: $('#itemid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                $.each(result, function (i, item) {
+                    jQuery("label[for='limitName']").html(item.limitName);
+                    jQuery("label[for='issueqtyName']").html(item.issueqtyName);
+                    jQuery("label[for='DueName']").html(item.DueName);
+                    jQuery("label[for='limitValue']").html(item.limitValue);
+                    jQuery("label[for='issueqtyValue']").html(item.issueqtyValue);
+                    jQuery("label[for='DueValue']").html(item.DueValue);
+                });
+            }
+        });
+    }
+    function deleteitem(id) {
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        },
+            function () {
+                var url = '@Url.Action("Delete")';
+                loadAjaxDelete(id, url);
+            });
+        return false;
+    }
+    function loadAjaxDelete(id, url) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            data: { id: id, cid: $('#cid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                swal({
+                    title: "Deleted Successfully...!",
+                    text: "",
+                    type: "success",
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+                location.reload();
+            }
+        });
+    }
+    function CheckQtyfunc() {
+        //alert("wooo");
+        CheckQtyAjax();
+    }
+    function CheckQtyAjax(val) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CheckQty")',
+            dataType: 'json',
+            data: { itemid: $('#itemid').val(), bid: $('#bid').val(), qty: $('#quanity').val() },
+            success: function (result) {
+                $.each(result, function (i, item) {
+                    alert(item);
+                    $("#quanity").val(0)
+                });
+            }
+        });
+    }
+
+</script>
+<link href="~/ClientCss/jquery.dataTables.css" rel="stylesheet" />
+<style type="text/css" class="init">
+    td.details-control {
+        background: url('../Images/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('../Images/details_close.png') no-repeat center center;
+    }
+
+    .dontshow {
+        display: none;
+    }
+
+    .table tr:nth-child(even) {
+        background: silver;
+    }
+</style>

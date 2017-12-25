@@ -1,0 +1,378 @@
+﻿@model SKMISApplication.Models.ReportModel
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    div.fadeMe {
+        opacity: 0.7;
+        filter: alpha(opacity=20);
+        background-color: #000;
+        width: 30%;
+        height: 10%;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        position: fixed;
+        margin-top: 60px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Reports</h3>
+                    </div>
+                    <div class="col-md-12">
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger", style = "font-size:22px;" })*@
+
+                        @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                        {
+                            <div id="hide" class="alert alert-danger fadeMe">
+                                <a href="#" class="close" data-dismiss="alert">×</a>
+                                <h4>Validation Errors</h4>
+                                @Html.ValidationSummary()
+                            </div>
+                        }
+                        <script>
+
+                            $(".validation-summary-errors").removeClass("validation-summary-errors");
+                            $(".input-validation-error").removeClass("input-validation-error").parent().addClass("has-error");
+                            setTimeout(function () {
+                                $("#hide").fadeOut("slow");
+                            }, 3000);
+
+                        </script>
+                    </div>
+
+
+
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        <table width="500">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label" })
+                                </td>
+                                <td>
+                                    <div style="margin-bottom:10px;">
+                                        @Html.DropDownListFor(model => model.ReportType, new List<SelectListItem> {
+                                                       new SelectListItem{Text="E. Store"},
+                                                       new SelectListItem{Text="Inventory"},
+                                                       new SelectListItem{Text="Beneficiary Wise"},
+                                                        new SelectListItem{Text="Extra Item Store Wise"},
+                                                        new SelectListItem{Text="Stock Report"}
+                                                   }, "Select Report Type", htmlAttributes: new { @class = "form-control select2", @id = "ddlreport" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="store_l">
+                                        @Html.LabelFor(model => model.StoreID, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="margin-bottom:10px;" id="store">
+                                        @Html.DropDownListFor(model => model.StoreID, new SelectList(Model.StoreList, "Value", "Text"),
+                       "Select Item", htmlAttributes: new { @class = "form-control select2", @id = "store" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="b_id_l">
+                                        @Html.LabelFor(model => model.BeneficiaryID, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="b_id">
+                                        @Html.DropDownListFor(model => model.BeneficiaryID, new SelectList(Model.BeneficiaryList, "Value", "Text"),
+                       "Select Item", htmlAttributes: new { @class = "form-control select2", @id = "Beneficiary" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div id="b_cbox">
+                                        @Html.RadioButtonFor(g => g.SearchBy, "Total Summary", new { id = "chkTotalSummary" }) Total Summary
+                                        @Html.RadioButtonFor(g => g.SearchBy, "Date wise Summary", new { id = "chkDatewiseSummary" }) Date wise Summary
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr />
+                        <table style="width:90%">
+                            <tr>
+                                <td style="width:10%">
+                                    <div id="s_bydate">
+                                        @Html.RadioButtonFor(g => g.SearchBy, "By Date", new { id = "chkByDate" }) By Date
+                                    </div>
+
+                                    @*@Html.RadioButtonFor(m => m.By_Date, "By Date", new { @Name = "SelectedValue" }) By Date*@
+                                </td>
+                                <td style="width:30%"></td>
+                                <td style="width:10%"></td>
+                                <td style="width:10%">
+                                    <div id="s_bymonth">
+                                        @Html.RadioButtonFor(g => g.SearchBy, "By Month", new { id = "chkByMonth" }) By Month
+                                    </div>
+                                    @*@Html.RadioButtonFor(m => m.By_Date, "By Month", new { @Name = "SelectedValue" }) By Month*@
+                                </td>
+                                <td style="width:30%"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="fromdate_l">
+                                        @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="input-group date" style="margin-bottom:10px;" id="fromdate">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.FromDate, "{0:dd/MM/yyyy}", new { @class = "form-control pull-right", @id = "datepicker" })
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div id="yesr_l">
+                                        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="margin-bottom:10px;" id="year">
+                                        @Html.DropDownListFor(model => model.Year, new List<SelectListItem> {
+                                                       new SelectListItem{Text="2016",Value="2016"},
+                                                       new SelectListItem {Text="2017",Value="2017" },
+                                                       new SelectListItem {Text="2018",Value="2018" },
+                                                       new SelectListItem {Text="2019",Value="2019" },
+                                                       new SelectListItem {Text="2020",Value="2020" },
+                                                       new SelectListItem {Text="2021",Value="2021" },
+                                                       new SelectListItem {Text="2022",Value="2022" },
+                                                       new SelectListItem {Text="2023",Value="2023" },
+                                                       new SelectListItem {Text="2024",Value="2024" },
+                                                       new SelectListItem {Text="2025",Value="2025" }
+                                                   }, "Select Year", htmlAttributes: new { @class = "form-control select2" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="todate_l">
+                                        @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="input-group date" style="margin-bottom:10px;" id="todate">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.ToDate, "{0:dd/MM/yyyy}", new { @class = "form-control pull-right", @id = "datepicker1" })
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div id="month_l">
+                                        @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div style="margin-bottom:10px;" id="month">
+                                        @Html.DropDownListFor(model => model.Month, new List<SelectListItem> {
+                                                       new SelectListItem{Text="January",Value="1"},
+                                                       new SelectListItem {Text="February",Value="2" },
+                                                       new SelectListItem {Text="March",Value="3" },
+                                                       new SelectListItem {Text="April",Value="4" },
+                                                       new SelectListItem {Text="May",Value="5" },
+                                                       new SelectListItem {Text="June",Value="6" },
+                                                       new SelectListItem {Text="July",Value="7" },
+                                                       new SelectListItem {Text="August",Value="8" },
+                                                       new SelectListItem {Text="September",Value="9" },
+                                                       new SelectListItem {Text="October",Value="10" },
+                                                       new SelectListItem {Text="November",Value="11" },
+                                                       new SelectListItem {Text="December",Value="12" }
+                                                   }, "Select Month", htmlAttributes: new { @class = "form-control select2" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div id="btn">
+                                        <input type="submit" id="get" value="Get" formtarget="_blank" class="btn btn-block btn-success" style="width:200px;" />
+                                    </div>
+
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    $(function () {
+        $("#b_id").hide();
+        $("#b_id_l").hide();
+        $("#store_l").hide();
+        $("#store").hide();
+        $("#b_cbox").hide();
+        $("#s_bydate").hide();
+        $("#s_bymonth").hide();
+        $("#fromdate_l").hide();
+        $("#fromdate").hide();
+        $("#yesr_l").hide();
+        $("#year").hide();
+        $("#todate_l").hide();
+        $("#todate").hide();
+        $("#month_l").hide();
+        $("#month").hide();
+        $("#btn").hide();
+
+
+
+
+
+
+        //Date picker
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+        $('#datepicker1').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        $("#ddlreport").change(function () {
+            if ($(this).val() == "E. Store")
+            {
+                $("#store_l").show();
+                $("#store").show();
+                $("#b_id_l").hide();
+                $("#b_id").hide();
+                $("#b_cbox").hide();
+                $("#s_bydate").show();
+                $("#s_bymonth").show();
+                $("#fromdate_l").show();
+                $("#fromdate").show();
+                $("#yesr_l").show();
+                $("#year").show();
+                $("#todate_l").show();
+                $("#todate").show();
+                $("#month_l").show();
+                $("#month").show();
+                $("#btn").show();
+                $("#chkByDate").attr("checked", "checked")
+            }
+            else if ($(this).val() == "Inventory") {
+                $("#store_l").show();
+                $("#store").show();
+                $("#b_id_l").hide();
+                $("#b_id").hide();
+                $("#b_cbox").hide();
+                $("#s_bydate").show();
+                $("#s_bymonth").show();
+                $("#fromdate_l").show();
+                $("#fromdate").show();
+                $("#yesr_l").show();
+                $("#year").show();
+                $("#todate_l").show();
+                $("#todate").show();
+                $("#month_l").show();
+                $("#month").show();
+                $("#btn").show();
+                $("#chkByDate").attr("checked", "checked")
+            }
+            else if ($(this).val() == "Beneficiary Wise") {
+                $("#store_l").hide();
+                $("#store").hide();
+                $("#b_id_l").show();
+                $("#b_id").show();
+                $("#b_cbox").show();
+                $("#s_bydate").show();
+                $("#s_bymonth").show();
+                $("#fromdate_l").show();
+                $("#fromdate").show();
+                $("#yesr_l").show();
+                $("#year").show();
+                $("#todate_l").show();
+                $("#todate").show();
+                $("#month_l").show();
+                $("#month").show();
+                $("#btn").show();
+                $("#chkByMonth").attr("checked", "checked")
+            }
+            else if ($(this).val() == "Extra Item Store Wise") {
+                $("#store_l").show();
+                $("#store").show();
+                $("#b_id_l").hide();
+                $("#b_id").hide();
+                $("#b_cbox").hide();
+                $("#s_bydate").show();
+                $("#s_bymonth").show();
+                $("#fromdate_l").show();
+                $("#fromdate").show();
+                $("#yesr_l").show();
+                $("#year").show();
+                $("#todate_l").show();
+                $("#todate").show();
+                $("#month_l").show();
+                $("#month").show();
+                $("#btn").show();
+                $("#chkByDate").attr("checked", "checked")
+            }
+            else if ($(this).val() == "Stock Report") {
+                $("#store_l").show();
+                $("#store").show();
+                $("#b_id_l").hide();
+                $("#b_id").hide();
+                $("#b_cbox").hide();
+                $("#s_bydate").hide();
+                $("#s_bymonth").hide();
+                $("#fromdate_l").hide();
+                $("#fromdate").hide();
+                $("#yesr_l").hide();
+                $("#year").hide();
+                $("#todate_l").hide();
+                $("#todate").hide();
+                $("#month_l").hide();
+                $("#month").hide();
+                $("#btn").show();
+                $("#chkByDate").attr("checked", "checked")
+            }
+            else {
+                $("#store_l").hide();
+                $("#store").hide();
+                $("#b_id_l").hide();
+                $("#b_id").hide();
+                $("#b_cbox").hide();
+                $("#s_bydate").hide();
+                $("#s_bymonth").hide();
+                $("#fromdate_l").hide();
+                $("#fromdate").hide();
+                $("#yesr_l").hide();
+                $("#year").hide();
+                $("#todate_l").hide();
+                $("#todate").hide();
+                $("#month_l").hide();
+                $("#month").hide();
+                $("#btn").hide();
+                $("#chkByDate").attr("checked", "checked")
+            }
+        });
+    });
+</script>

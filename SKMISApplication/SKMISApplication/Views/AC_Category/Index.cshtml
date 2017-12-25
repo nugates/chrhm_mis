@@ -1,0 +1,153 @@
+﻿@model IEnumerable<SKMISApplication.Models.AC_CategoryModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    div.fadeMe {
+        opacity: 0.7;
+        filter: alpha(opacity=20);
+        background-color: #000;
+        width: 30%;
+        height: 10%;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        position: fixed;
+        margin-top: 60px;
+    }
+</style>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Accounts Category List</h3>
+                    <div style="float: right;">
+                        @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
+                        @Html.ActionLink("CREATE NEW", "Create", "AC_Category", new { @class = "btn btn-block btn-primary" })
+                    </div>
+                </div>
+
+                @*VALIDATION MSG A AREA*@
+                <div class="col-md-12">
+                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger", style = "font-size:22px;" })*@
+
+                    @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                    {
+                        <div id="hide" class="alert alert-danger fadeMe">
+                            <a href="#" class="close" data-dismiss="alert">×</a>
+                            <h4>Validation Errors</h4>
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+                    <script>
+
+                        $(".validation-summary-errors").removeClass("validation-summary-errors");
+                        $(".input-validation-error").removeClass("input-validation-error").parent().addClass("has-error");
+                        setTimeout(function () {
+                            $("#hide").fadeOut("slow");
+                        }, 3000);
+
+                    </script>
+                </div>
+
+
+
+
+
+
+                <div class="box-body">
+                    <table class="table table-bordered table-striped" id="CategoryGrid">
+                        <thead>
+                            <tr>
+                                <th style="width:25%">
+                                    @Html.DisplayNameFor(model => model.Category)
+                                </th>
+                                <th  style="width:55%">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    
+                                    <td>
+                                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-danger glyphicon glyphicon-trash" })*@
+                                        <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-toggle="modal" onclick="deleteCategory(@item.ID)"></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<script>
+
+    $(function () {
+        //alert("sashg");
+        $("#CategoryGrid").DataTable({
+            "sScrollX": "99.8%"
+        });
+    });
+
+    function deleteCategory(id) {
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        },
+            function () {
+                var url = '@Url.Action("Delete")';
+                loadAjax(id, url);
+            });
+        return false;
+    }
+
+    function loadAjax(id, url) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            data: { id: id },
+            success: function (result) {
+                swal({
+                    title: "Deleted Successfully...!",
+                    text: "",
+                    type: "success",
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+                location.reload();
+            }
+        });
+    }
+</script>
+
+

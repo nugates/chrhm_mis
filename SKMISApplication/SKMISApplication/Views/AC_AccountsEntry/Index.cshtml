@@ -1,0 +1,111 @@
+﻿@model IEnumerable<SKMISApplication.Models.AC_AccountsEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">E. Store</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-12">
+                        <div class="col-lg-7">
+                            <div class="col-lg-2">
+                                <span style="font-weight:bold">Search </span>
+                            </div>
+                            <div class="col-lg-7">
+                                <input id="advSearchtxt" type="text" placeholder="Advance Search" class="form-control" />
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="button" class="btn btn-default" style="margin-left:20px;" value="Search" onclick="search()" />
+                                @*@Html.ActionLink("Search", "AdvDetail", "ItemAllocation", null, new { onclick = "this.href += '?searchString=' + $('#advSearchtxt').val()", @class = "btn btn-block btn-primary" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:100px">
+                        <table table class="table table-bordered table-striped" id="tblAccountBeneficiary">
+                            <thead></thead>
+                            <tbody> </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function addItem(val) {
+        var url = '@Html.Raw(Url.Action("GetBeneficiaryDetails", "AC_AccountsEntry", new { bid = "__bidId__"}))';
+        var params = url.replace('__bidId__', val);
+        alert(params);
+        window.location.href = params;
+    }
+    function ViewItem(val) {
+        var c_id = $('#c_id').val
+        var url = '@Html.Raw(Url.Action("EStoreView", "ItemAllocation", new { bid = "__bidId__"}))';
+        var params = url.replace('__bidId__', val);
+        window.location.href = params;
+    }
+    function search() {
+        loadAjax();
+    }
+    function loadAjax() {
+        //alert(789);
+        $('body').pleaseWait();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadTable2")',
+            dataType: 'json',
+            data: { searchString: $('#advSearchtxt').val() },
+            success: function (result) {
+                var data = '';
+                $("#tblAccountBeneficiary tr").remove();
+                var rows = "<tr>" +
+                    "<th align='left' style ='display:none'></th><th>FORM ID</th><th>Allotment No</th><th>BENEFICIARY</th><th>CONSTITUENCY</th><th></th>" +
+                    "</tr>";
+                $('#tblAccountBeneficiary thead').append(rows);
+                $.each(result, function (i, item) {
+                    var rows = "<tr>" +
+                        "<td style ='display:none'>" + item.ID + "</td>" +
+                        "<td>" + item.FormID + "</td>" +
+                        "<td>" + item.AllotmentNo + "</td>" +
+                        "<td>" + item.BeneficiaryName + "</td>" +
+                        "<td>" + item.ConstituencyName + "</td>" +
+                        "<td><input type='button' id='itemallocationview' value='ADD' class='btn btn-block btn-success' onclick='addItem(" + item.ID + ")'/></td>" +
+                        "<td><input type='button' id='detailview' value='VIEW' class='btn btn-block btn-success' onclick='ViewItem(" + item.ID + ")'/></td>" +
+                        "</tr>";
+                    $('#tblAccountBeneficiary tbody').append(rows);
+                });
+                $('body').pleaseWait('stop');
+                ShortTable("#tblAccountBeneficiary");
+            }
+        });
+    }
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "bDestroy": true,
+            "sScrollX": "99.5%"
+        });
+    }
+
+
+
+    $(document).ready(function () {
+
+        //$('#tblitemallocation').DataTable({
+        //    "order": [[5, "asc"]],
+        //    "lengthMenu": [5, 10, 20]
+        //});
+
+    });
+
+</script>

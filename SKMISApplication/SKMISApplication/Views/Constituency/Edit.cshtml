@@ -1,0 +1,79 @@
+﻿@model SKMISApplication.Models.ConstituencyModel
+@{
+    ViewBag.Title = "Edit";
+}
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Constituency Edit</h3>
+                        @*<div style="float: right;">
+
+                                @Html.ActionLink("Back to List", "Index", "Beneficiary", new { @class = "btn btn-block btn-primary" })
+                            </div>*@
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+
+                        <div class="header-div">
+                            <div class="form-horizontal">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Constituency, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                    </div>
+                                                    @Html.EditorFor(model => model.Constituency, new { htmlAttributes = new { @class = "form-control", placeholder = "Constituency" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Constituency, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-book"></i>
+                                                    </div>
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "description", placeholder = "Description" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-bottom: 15px;">
+                                        <div class="col-lg-12">
+                                            <hr />
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-3" style="text-align: left">
+                                                <input type="submit" id="save" value="Update" class="btn btn-block btn-success" />
+                                            </div>
+                                            <div class="col-lg-3" style="text-align: center">
+                                                @Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                                @*<input type="submit" value="Cancel" class="btn btn-block btn-danger" />*@
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+}

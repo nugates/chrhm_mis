@@ -1,0 +1,427 @@
+﻿@model SKMISApplication.Models.BeneficiaryEntryModel
+@{
+    ViewBag.Title = "DetailsTab";
+}
+<link href="~/Content/themes/base/all.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<style>
+    .demoHeaders {
+        margin-top: 2em;
+    }
+
+    #dialog-link {
+        padding: .4em 1em .4em 20px;
+        text-decoration: none;
+        position: relative;
+    }
+
+        #dialog-link span.ui-icon {
+            margin: 0 5px 0 0;
+            position: absolute;
+            left: .2em;
+            top: 50%;
+            margin-top: -8px;
+        }
+
+    #icons {
+        margin: 0;
+        padding: 0;
+    }
+
+        #icons li {
+            margin: 2px;
+            position: relative;
+            padding: 4px 0;
+            cursor: pointer;
+            float: left;
+            list-style: none;
+        }
+
+        #icons span.ui-icon {
+            float: left;
+            margin: 0 4px;
+        }
+</style>
+<script>
+
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="box-header">
+                <h3 class="box-title">Beneficiery List</h3>
+                <div style="float: right;">
+                    @Html.ActionLink("Back", "Detail", new { id = Model.ConstituencyID }, htmlAttributes: new { @class = "btn btn-block btn-primary" })
+                </div>
+            </div>
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">Details</a></li>
+                    <li><a href="#tabs-2">Progress</a></li>
+                    <li><a href="#tabs-3">Reports</a></li>
+                    <li><a href="#tabs-4">Audits Trails</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <p>
+                        <table style="font-size:11px;">
+                            <tr>
+                                <td>
+                                    <div class="header-div">
+                                        <div class="form-horizontal">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.FormID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-user"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.FormID, new { htmlAttributes = new { @class = "form-control", @id = "formid", placeholder = "Form ID", @readonly = "readonly" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.FormID, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Allotment No", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.AllotmentNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Allotment No.", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Constituency", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.DropDownListFor(model => model.ConstituencyID, new SelectList(Model.ConstituencyList, "Value", "Text"),
+                       "Select Constituency", htmlAttributes: new { @class = "form-control select2", @disabled = "disabled" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("ADC/ Dev Sub Div", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.DropDownListFor(model => model.ADCID, new SelectList(Model.ADCList, "Value", "Text"),
+                       "Select ADC/ Dev Sub Div", htmlAttributes: new { @class = "form-control select2", @disabled = "disabled" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Block", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.DropDownListFor(model => model.BlockID, new SelectList(Model.BlockList, "Value", "Text"),
+                       "Select Block", htmlAttributes: new { @class = "form-control select2", @disabled = "disabled" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.Label("GPU", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.GPUName, new { htmlAttributes = new { @class = "form-control", placeholder = "GPU Name", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Ward Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.WardName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ward Name", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.BeneficiaryName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-user"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name", @readonly = "readonly" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.BeneficiaryName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-phone"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Number", @readonly = "readonly" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AadharNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-credit-card"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.AadharNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Aadhar Number", @readonly = "readonly" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.AadharNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </p>
+                </div>
+                <div id="tabs-2">
+                    <p>
+                        <table style="font-size:11px; width:80%;">
+                            <tr>
+                                <td>
+                                    <div class="header-div">
+                                        <div class="form-horizontal">
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.DateOfCommencement, htmlAttributes: new { @class = "control-label col-md-6" })
+                                                        <div class="col-md-6">
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.DateOfCommencement, new { htmlAttributes = new { @class = "form-control pull-right", @id = "datepicker", placeholder = "Date Of Issue" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.DateOfCommencement, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="form-group">
+                                                        @Html.Label("Site Levelling and Protective Work", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.SiteLevellingAndProtectiveWork, new { htmlAttributes = new { @class = "form-control", placeholder = "Form ID", @readonly = "readonly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Upto Plinth Slab", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.UptoPlinthSlab, new { htmlAttributes = new { @class = "form-control", placeholder = "Allotment No." } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Casting of Slab", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.CastingOfSlab, new { htmlAttributes = new { @class = "form-control", placeholder = "Allotment No." } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Septic Tank", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.SepticTank, new { htmlAttributes = new { @class = "form-control", placeholder = "Allotment No." } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Hand Over", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.HandOver, new { htmlAttributes = new { @class = "form-control", placeholder = "Allotment No." } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.Label("Brick & Plaster Work", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.BrickPlasterWork, new { htmlAttributes = new { @class = "form-control", placeholder = "GPU Name" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Door & Windows", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.DoorWindows, new { htmlAttributes = new { @class = "form-control", placeholder = "Ward Name" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Electrification & Plumbing", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.ElectrificationPlumbing, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("Paiting & Finishing", htmlAttributes: new { @class = "control-label col-md-10" })
+                                                        <div class="col-md-2">
+                                                            <div class="input-group">
+                                                                @Html.CheckBoxFor(model => model.PaitingFinishing, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Number" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.DateOfCompletion, htmlAttributes: new { @class = "control-label col-md-6" })
+                                                        <div class="col-md-6">
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                @Html.EditorFor(model => model.DateOfCompletion, new { htmlAttributes = new { @class = "form-control pull-right", @id = "datepicker1", placeholder = "Date Of Issue" } })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.DateOfCompletion, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <hr />
+                                                <div class="col-lg-4"></div>
+                                                <div class="col-lg-4" style="text-align: left">
+                                                    @*<input type="submit" id="save" value="Update" class="btn btn-block btn-success" name="a" />*@
+                                                    <button name="button" value="Update" class="btn btn-block btn-success">Update</button>
+                                                </div>
+                                                <div class="col-lg-4"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </p>
+                </div>
+                <div id="tabs-3">
+                    <p>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <div class="col-lg-12">
+                                        <hr />
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-4" style="text-align: left">
+                                            <button name="button" value="summaryreport" formtarget="_blank" class="btn btn-block btn-success">Summary Report</button>
+                                        </div>
+                                        <div class="col-lg-4"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-lg-12">
+                                        <hr />
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-4" style="text-align: left">
+                                            <button name="button" value="detailreport" formtarget="_blank" class="btn btn-block btn-success">Detail Report</button>
+                                        </div>
+                                        <div class="col-lg-4"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        @*<input type="submit" id="save" value="SR" class="btn btn-block btn-success" name="b" />*@
+                        @*@Html.ActionLink("Detail Report", "SummaryReport", new { id = Model.FormID }, htmlAttributes: new { @class = "btn btn-block btn-danger", @formtarget = "_blank" })*@
+                        @*@Html.ActionLink("Detail Report", "DetailReport", new { id = Model.FormID }, htmlAttributes: new { @class = "btn btn-block btn-danger", @formtarget = "_blank" })*@
+                    <p>
+                </div>
+                <div id="tabs-4">
+                    <p>
+                        <ul>
+                            
+                        </ul>
+                    <p>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    function reportsummary() {
+        
+        var formid = $("#formid").val();
+        alert(formid)
+        var url = '@Url.Action("SummaryReport")';
+        loadAjax(formid, url);
+        return false;
+    }
+    function reportdetail() {
+        var url = '@Url.Action("DetailReport")';
+        loadAjax(formid, url);
+        return false;
+    }
+
+    function loadAjax(formid, url) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            data: { formid: formid },
+            success: function (result) {                
+                //location.reload();
+            }
+        });
+    }
+
+
+
+    $(function () {
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        });
+    });
+    $(function () {
+        //Date picker
+        $('#datepicker1').datepicker({
+            autoclose: true
+        });
+    });
+</script>
+

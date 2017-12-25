@@ -1,0 +1,134 @@
+﻿@model IEnumerable<SKMISApplication.Models.BeneficiaryEntryModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Beneficiery List</h3>
+                        <div style="float: right;">
+                            @Html.ActionLink("Back", "Index", "Beneficiary", new { @class = "btn btn-block btn-primary" })
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="float: left; padding-left:0px; padding-bottom:10px;">
+                        <div class="col-lg-4">
+                            @*@Html.EditorForModel(Model.FirstOrDefault().Search, new { htmlAttributes = new { @class = "form-control", placeholder = "Search", @id="advSearchtxt" }})*@
+                            <input id="advSearchtxt" type="text" placeholder="Advance Search" class="form-control" />
+
+                        </div>
+                        <div class="col-lg-2">
+
+                            @Html.ActionLink("Search", "AdvDetail", "Beneficiary", null, new { onclick = "this.href += '?searchString=' + $('#advSearchtxt').val()", @class = "btn btn-block btn-primary" })
+                            @*@Html.ActionLink("Search", "AdvDetail", "Beneficiary", new { searchString = "xxx" }, new { onclick = "this.href.replace('xxx', $('#advSearchtxt').val())", @class = "btn btn-block btn-primary" })*@
+
+                            @*@Html.ActionLink("Search","AdvDetail","Beneficiary", new { searchString = "$('#advSearchtxt').val()" }, new { @class = "btn btn-block btn-primary", @id="btnSrch" })*@
+                            @*@Html.ActionLink("Search", "AdvDetail", "Beneficiary", new { searchString = "xxx" }, new { @class = "btn btn-block btn-primary", onclick = "advSearch();" })*@
+                            @*@Html.ActionLink( "Search", "Detail", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-info-sign" })*@
+                            @*<input id="Button1" class="btn btn-block btn-primary" type="button" value="Search"  onclick = "advSearch();" />*@
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped" id="beneficieryGrid">
+                            <thead>
+                                <tr>
+                                    <th width="15%">F. ID</th>
+                                    <th width="20%">Ben. Name</th>
+                                    <th width="20%">Allot. No</th>
+                                    <th width="20%">Const. Name</th>
+                                    <th>ADC</th>
+                                    <th>Block</th>
+                                    <th>GPU</th>
+                                    <th>Ward</th>
+                                    <th>Edit  </th>
+                                    <th>Delete</th>
+                                    <th>View</th>
+                                    <th>Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.FormID)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BeneficiaryName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.AllotmentNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ConstituencyName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ADCName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BlockName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GPUName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.WardName)</td>
+                                        
+                                        @*<td>@Html.DisplayFor(modelItem => item.MobileNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.AadharNo)</td>*@
+                                        <td>
+                                            @Html.ActionLink(" ", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-block btn-danger glyphicon glyphicon-trash" })*@
+                                            <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" data-toggle="modal"
+                                               onclick="deleteBeneficiary(@item.ID, '@item.BeneficiaryName')"></a>
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" ", "ViewDocument", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-file" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" ", "DetailTab", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-info-sign" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    $(function () {
+        $("#beneficieryGrid").DataTable({
+            "sScrollX": "99.8%"
+        });
+    });
+    function deleteBeneficiary(id, aname) {
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        },
+            function () {
+                var url = '@Url.Action("Delete")';
+                loadAjax(id, url);
+            });
+        return false;
+    }
+
+    function loadAjax(id, url) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            data: { id: id },
+            success: function (result) {
+                swal({
+                    title: "Deleted Successfully...!",
+                    text: "",
+                    type: "success",
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+                location.reload();
+            }
+        });
+    }
+</script>

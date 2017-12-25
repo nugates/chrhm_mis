@@ -1,0 +1,112 @@
+﻿@model IEnumerable<SKMISApplication.Models.InventoryEntryModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Inventory List</h3>
+                        <div style="float: right;">
+                            @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
+                            @Html.ActionLink("CREATE NEW", "Create", "InventoryEntry", new { @class = "btn btn-block btn-primary" })
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped" id="InventoryGrid">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.StoreName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.ItemName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.QuantityView)</th>
+                                    <th>@Html.DisplayNameFor(model => model.VehicleNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EntryDate)</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.StoreName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ItemName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuantityView)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VehicleNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EntryDate)</td>                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+}
+<script>
+    $(function () {
+        //alert("sashg");
+        $("#InventoryGrid").DataTable({
+            "sScrollX": "99.8%"
+        });
+        //$('#example1').DataTable({
+        //    "paging": true,
+        //    "lengthChange": false,
+        //    "searching": false,
+        //    "ordering": true,
+        //    "info": true,
+        //    "autoWidth": false
+        //});
+    });
+
+    //$(window).load(function () {
+    //    alert(33);
+    //    // Run code
+
+    //    $.getScript("http://"+$(location).attr('host')+"/plugins/datatables/dataTables.bootstrap.min.js");
+    //    $.getScript("http://" +$(location).attr('host')+"/plugins/datatables/dataTables.bootstrap.min.js");
+    //    //return false;
+    //});
+    function deleteConstituency(id) {
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        },
+            function () {
+                var url = '@Url.Action("Delete")';
+        loadAjax(id, url);
+            });
+        return false;
+}
+
+function loadAjax(id, url) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        data: { id: id },
+        success: function (result) {
+                swal({
+                    title: "Deleted Successfully...!",
+                    text: "",
+                    type: "success",
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+                location.reload();
+        }
+    });
+}
+</script>

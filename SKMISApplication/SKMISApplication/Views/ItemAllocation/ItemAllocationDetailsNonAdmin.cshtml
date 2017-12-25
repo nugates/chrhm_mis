@@ -1,0 +1,451 @@
+﻿@model SKMISApplication.Models.ItemAllocationModel
+@{
+    ViewBag.Title = "E.Store";
+}
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">E. Store</h3>
+                        @*<div style="float: right;">
+                                @Html.ActionLink("Back to List", "Index", "Beneficiary", new { @class = "btn btn-block btn-primary" })
+                            </div>*@
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ConstituencyID, htmlAttributes: new { @class = "control-label col-md-4", @id = "cid" })
+                        @Html.HiddenFor(model => model.BeneficiaryID, htmlAttributes: new { @class = "control-label col-md-4", @id = "bid" })
+                        <div class="header-div">
+                            <div class="form-horizontal">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FormID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.FormID, new { htmlAttributes = new { @class = "form-control", @id = "formid", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.BeneficiaryName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.IssueDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    @*@Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control pull-right", @id = "datepicker", placeholder = "Date Of Issue" } })*@
+                                                    @Html.TextBoxFor(m => m.IssueDate, "{0:dd/MM/yyyy}", new { @class = "form-control pull-right", @id = "datepicker" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ChallanNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ChallanNo, new { htmlAttributes = new { @class = "form-control", @id = "challan", placeholder = "Challan No" } })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.AllotmentNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.AllotmentNo, new { htmlAttributes = new { @class = "form-control", @id = "allocationno", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ConstituencyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ConstituencyName, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.OrderPlaceBy, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.OrderPlaceBy, new { htmlAttributes = new { @class = "form-control", @id = "orderplaceby", placeholder = "Order Place By" } })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.VehicleNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.VehicleNo, new { htmlAttributes = new { @class = "form-control", @id = "vehicleno", placeholder = "Vehicle No" } })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group">
+                                                                 @Html.LabelFor(model => model.ItemID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                                 <div class="col-md-8">
+                                                                     @Html.DropDownListFor(model => model.ItemID, new SelectList(Model.ItemList, "Value", "Text"),
+                                            "Select Item", htmlAttributes: new { @class = "form-control select2", @id = "itemid", @onchange = "Checklimit()" })
+                                                                 </div>
+                                                             </div>
+
+                                                             <div class="form-group">
+                                                                 @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                                 <div class="col-md-8">
+                                                                     @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "quanity", @onchange = "CheckQtyfunc()" } })
+                                                                 </div>
+                                                             </div>*@
+                                        @*<div class="form-group">
+                                                                 @Html.LabelFor(model => model.UnitID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                                 <div class="col-md-8">
+                                                                     @Html.DropDownListFor(model => model.UnitID, new SelectList(Model.UnitList, "Value", "Text"),
+                                            "Select Item", htmlAttributes: new { @class = "form-control select2" })
+                                                                 </div>
+                                                             </div>*@
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="dts" style="vertical-align: middle; margin-left:20%;"></label>
+                                </div>
+                                <div class="row" style="margin-bottom: 15px;">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-4"></div>
+                                            <div class="col-lg-4" style="text-align: left">
+                                                <input type="button" id="save" value="Save" class="btn btn-block btn-success" onclick="addParam()" />
+                                            </div>
+                                            <div class="col-lg-4" style="text-align: center;">
+                                                @Html.ActionLink("Cancel", "Create", "ItemAllocation", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                                @*@Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })*@
+                                                @*<input type="submit" value="Cancel" class="btn btn-block btn-danger" />*@
+                                            </div>
+                                            @*<div class="col-lg-2"></div>*@
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <table style="float:right; margin-right:40px; width:50%">
+                                                <tr>
+                                                    <td>
+                                                        <label for="limitName" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label for="limitValue" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="issueqtyName" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label for="issueqtyValue" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="DueName" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label for="DueValue" style="vertical-align: middle; margin-left:20%;"></label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            @*<label for="dts" style="vertical-align: middle; margin-left:20%;"></label>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row" style="margin-bottom: 15px;">
+                                        <div class="col-lg-12">
+                                            <hr />
+                                            <table table class="table table-bordered table-striped" id="tblitemallocationitem">
+                                                <thead></thead>
+                                                <tbody> </tbody>
+                                            </table>
+                                        </div>
+                                    </div>*@
+                                <div class="overlay" id="tblItmAllctn">
+                                    @*<table id="tblitemallocation">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%; display:none">ITEM ID</th>
+                                                    <th style="width: 30%">Item Name</th>
+                                                    <th style="width: 15%">Limit</th>
+                                                    <th style="width: 15%">Qty. Issued</th>
+                                                    <th style="width: 15%">Qty. Due</th>
+                                                    <th style="width: 15%">Qty. To Issue</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>*@
+
+                                    @*<table table class="table table-bordered table-striped" id="tblitemallocationitem">
+                                            <thead></thead>
+                                            <tbody> </tbody>
+                                        </table>*@
+                                </div>
+
+
+                                <div class="row" style="margin-bottom: 15px;">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-4"></div>
+                                            <div class="col-lg-4" style="text-align: left">
+                                                <input type="button" id="save" value="Save" class="btn btn-block btn-success" onclick="addParam()" />
+                                            </div>
+                                            <div class="col-lg-4" style="text-align: center;">
+                                                @Html.ActionLink("Cancel", "Create", "ItemAllocation", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                                @*@Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })*@
+                                                @*<input type="submit" value="Cancel" class="btn btn-block btn-danger" />*@
+                                            </div>
+                                            @*<div class="col-lg-2"></div>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+    });
+    function loadAjax() {
+        $('body').pleaseWait();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadAllocationTable")',
+            dataType: 'json',
+            data: { cid: $('#cid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                console.log(result);
+
+                var table = '<table id="tblitemallocation" class="table table-bordered table-hover"><thead><tr><th style="width: 5%; display:none">ITEM ID</th><th style="width: 30%">Item Name</th>' +
+                    '<th style="width: 15%">Limit</th><th style="width: 15%">Qty. Issued</th><th style="width: 15%">Qty. Due</th>' +
+                    '<th style="width: 15%">Qty. Extra</th><th style="width: 15%">Conf. Ex. Issue</th>' +
+                    '<th style="width: 15%">Qty. To Issue</th></tr></thead><tbody>';
+
+                var obj = jQuery.parseJSON(result);
+                $.each(obj, function (i, item) {
+                    table = table + "<tr><td style='width: 5 %; display: none'>" + item.ID + "</td><td>" + item.ItemName + "</td><td>" + item.Limit + "</td>" +
+                        "<td>" + item.QtyIssued + "</td><td>" + item.QtyDue + "</td><td>" + item.QtyExtra + "</td><td><input id='chkConfirm' type='checkbox' /></td>" +
+                        "<td> <input id='txtQtyToIssue' type='number' onkeyup='calcQtyAmt(" + item.QtyDue + ")' />  </td></tr>";
+                });
+
+                document.getElementById("tblItmAllctn").innerHTML = table + '</tbody></table>';
+                $('body').pleaseWait('stop');
+                ShortTable("#tblitemallocation");
+
+            }
+        });
+        //setTimeout(function () {
+        //    $('body').pleaseWait('stop');
+        //}, 300);
+    }
+
+    function addParam() {
+        var rowCount = $('#tblitemallocation >tbody >tr').length;
+        var i = 0;
+        if (rowCount > 0) {
+            propertyList = new Array();
+            $('#tblitemallocation  >tbody >tr').each(function () {
+                var property = {};
+                if ($(this).find("input[id^='txtQtyToIssue']").val() != '') {
+
+                    property.ItemID = parseInt($(this).children("td:first-child").text());
+                    property.BeneficiaryID = parseInt($("#bid").val());
+                    property.ConstituencyID = parseInt($("#cid").val());
+                    property.Quantity = parseFloat($(this).find("input[id^='txtQtyToIssue']").val());
+                    property.IssueDate = $("#datepicker").val();
+                    property.VehicleNo = $("#vehicleno").val();
+                    property.OrderPlaceBy = $("#orderplaceby").val();
+                    property.ChallanNo = $("#challan").val();
+
+                    propertyList[i++] = property;
+
+                }
+            });
+            if (propertyList.length > 0) {
+                SaveItem(propertyList);
+            }
+            else {
+                swal({
+                    title: "Please Enter Data...!",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
+            }
+        }
+    }
+
+    function SaveItem(Items) {
+        //alert(JSON.stringify(Items));
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SaveItemForBeneficiary")',
+            dataType: 'json',
+            data: { Items: Items },
+            success: function (result) {
+                //if (result == "success") {
+                //    loadAjax();
+                //}
+                loadAjax();
+            }
+        });
+    }
+    //$('#txtQtyToIssue').keydown(function (e) {
+    //    //if (e.keyCode == 13) {
+    //    var inamt = $(this).next('.inputs').val();
+    //    alert(JSON.stringify(inamt));
+    //    //}
+    //});
+    function calcQtyAmt(qtyDue) {
+
+        var $tbody = $('table#tblitemallocation tbody');
+        //var inamt = $("#txtQtyToIssue").val();
+        //var inamt = $('#tblitemallocation').nextAll('.inputs:first').focus();//$('#tblitemallocation tr').find('input:first').focus()
+        $tbody.children('tr').each(function () {
+            //if ($(this).find(':checkbox').is(":not(:checked)")) {
+            //    alert(' not checked');
+            //}
+            if ($(this).find("input[id^='txtQtyToIssue']").val() != '') {
+
+                if ($(this).find(':checkbox').is(':not(:checked)')) {
+
+                    var qty = parseFloat($(this).find("td:eq(7)").find('#txtQtyToIssue').val());
+                    var qtyDue = parseFloat($(this).find("td:eq(4)").text().trim());
+
+                    if (qty > qtyDue) {
+
+                        $(this).find("td:eq(7)").find('#txtQtyToIssue').focus();
+
+                        swal({
+                            title: "You have entered excess Quantity Due..!",
+                            text: "",
+                            type: "warning",
+                            showCancelButton: false,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                        $(this).find("td:eq(7)").find('#txtQtyToIssue').val('');
+                    }
+                }
+                
+            }
+
+
+
+
+        });
+
+
+    }
+
+
+    function format(item_id, c_id, b_id) {
+
+        var table = '<table id="example1" class="table" style="font-family:Arial,sans-serif;border-collapse:collapse;width:90%;float:right;">';
+        //var style = "";
+        //if (type == "CANCELED") {
+        //    style = "display:none"
+        //}
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadAllocationTableChild")',
+            dataType: 'json',
+            data: { itemid: item_id, cid: c_id, bid: b_id },
+            success: function (result) {
+                table = table + '<thead><tr style="background-color:#B0BED9"><th style="font-size:10px;">QUANTITY</th><th style="font-size:10px;">ISSUE DATE</th> </tr></thead> <tbody>';
+
+                $.each(result.data, function (i, item) {
+                    var date = new Date(parseInt(item.issuedateView.substr(6)));
+                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                    //alert(item.ItemName);
+                    table = table + " <tr><td style='font-size:10px;'>" + item.ViewQuantity + "</td><td style='font-size:10px;'>" + displayDate + "</td></tr>"
+                });
+                TblData = (table + '</tbody></table>');
+                //if (obj == "Fill") {
+                //    var data = jQuery.parseJSON(Result.d.LeaveDetails)[0];
+                //TblData = "<div class='register-box classall' style='width: 100%; margin: 0px' id='addnew'><div class='register-box-body'><input type='hidden' id='lid' value='" + id + "'><input type='hidden' id='Eid' value='" + eid + "'><div class='col-lg-12 removespace'><div class='col-lg-6 removespace' style='padding-right: 20px'><div class='col-lg-4 removespace Middle'>Application Date </div><div class='col-lg-8 removespace'><input type='text' id='txtApplicationDate' class='form-control' value='" + data.ApplicationDate + "' style='width:100%' readonly /></div></div><div class='col-lg-6 removespace'><div class='col-lg-4 removespace Middle'>Approved by CEO on </div><div class='col-lg-8 removespace'><input type='text' id='txtceoapproved' class='form-control' value='" + data.CEOApproved + "' style='width:100%' readonly /></div></div></div><div class='col-lg-12 removespace'><div class='col-lg-6 removespace' style='padding-right: 20px'><div class='col-lg-4 removespace Middle'>Department</div><div class='col-lg-8 removespace'><input type='text' id='txtdepartment' class='form-control' value='" + data.Department + "' style='width:100%' readonly /></div></div><div class='col-lg-6 removespace'><div class='col-lg-4 removespace Middle'>Approved by HR on </div><div class='col-lg-8 removespace'><input type='text' id='txthrapproved' class='form-control' value='" + data.HRApproved + "' style='width:100%' readonly /></div></div></div><div class='col-lg-12 removespace'><div class='col-lg-6 removespace' style='padding-right: 20px'><div class='col-lg-4 removespace Middle'> Charge hand over </div> <div class='col-lg-8 removespace'><input type='text' id='txtcho' value='" + data.CHO + "' class='form-control' style='width:100%' readonly /></div></div><div class='col-lg-6 removespace'><div class='col-lg-4 removespace Middle'>Approved by Lead on </div> <div class='col-lg-8 removespace'><input type='text' id='txtleadapproved' class='form-control' value='" + data.LeadApproved + "' style='width:100%' readonly /></div></div></div><div class='col-lg-12 removespace'><div class='col-lg-2 removespace Middle'>Reason</div><div class='col-lg-10 removespace'><textarea id='txtreason' class='form-control' readonly style='resize: none; min-height: 100px; width:100%'>" + data.ReasonforLeave + "</textarea></div></div></div><div class='col-lg-12 removespace'><div class='col-lg-9 removespace'></div><div class='col-lg-2 removespace'> <button type='button' id='btnreject' style='" + style + "' class='btn btn-primary btn-block btn-flat' onclick='Reject()'>Reject</button> </div></div></div>"
+                //}
+            }
+        });
+    }
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "sScrollX": "99.8%",
+            "paging": false
+        });
+    }
+    $(document).ready(function () {
+        //jQuery("label[for='dts']").html(");
+        loadAjax();
+    });
+
+    function Checklimit() {
+        //alert("wooo");
+        ChecklimitAjax();
+    }
+    function ChecklimitAjax(val) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CheckLimit")',
+            dataType: 'json',
+            data: { itemid: $('#itemid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                $.each(result, function (i, item) {
+                    jQuery("label[for='limitName']").html(item.limitName);
+                    jQuery("label[for='issueqtyName']").html(item.issueqtyName);
+                    jQuery("label[for='DueName']").html(item.DueName);
+                    jQuery("label[for='limitValue']").html(item.limitValue);
+                    jQuery("label[for='issueqtyValue']").html(item.issueqtyValue);
+                    jQuery("label[for='DueValue']").html(item.DueValue);
+                });
+                //ShortTable("#tblitemallocation");
+            }
+        });
+    }
+
+    function CheckQtyfunc() {
+        //alert("wooo");
+        CheckQtyAjax();
+    }
+    function CheckQtyAjax(val) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CheckQty")',
+            dataType: 'json',
+            data: { itemid: $('#itemid').val(), bid: $('#bid').val(), qty: $('#quanity').val() },
+            success: function (result) {
+                $.each(result, function (i, item) {
+
+                    $("#quanity").val(0)
+                });
+                //ShortTable("#tblitemallocation");
+            }
+        });
+    }
+
+</script>

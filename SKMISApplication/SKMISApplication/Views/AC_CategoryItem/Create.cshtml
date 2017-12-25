@@ -1,0 +1,147 @@
+﻿@model SKMISApplication.Models.AC_CategoryItemModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    div.fadeMe {
+        opacity: 0.7;
+        filter: alpha(opacity=20);
+        background-color: #000;
+        width: 30%;
+        height: 10%;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        position: fixed;
+        margin-top: 60px;
+    }
+</style>
+
+
+
+@using (Html.BeginForm()) 
+{
+    
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Account Category Entry</h3>
+                        <div style="float: right;">
+
+                            @Html.ActionLink("Back", "Index", "AC_CategoryItem", new { @class = "btn btn-block btn-primary" })
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+
+                        <div class="header-div">
+                            <div class="form-horizontal">
+
+                                @*VALIDATION MSG A AREA*@
+                                <div class="col-md-12">
+                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger", style = "font-size:22px;" })*@
+
+                                    @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                                    {
+                                        <div id="hide" class="alert alert-danger fadeMe">
+                                            <a href="#" class="close" data-dismiss="alert">×</a>
+                                            <h4>Validation Errors</h4>
+                                            @Html.ValidationSummary()
+                                        </div>
+                                    }
+                                    <script>
+
+                                            $(".validation-summary-errors").removeClass("validation-summary-errors");
+                                            $(".input-validation-error").removeClass("input-validation-error").parent().addClass("has-error");
+                                            setTimeout(function () {
+                                                $("#hide").fadeOut("slow");
+                                            }, 3000);
+
+                                    </script>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                    </div>
+                                                    @Html.DropDownListFor(model => model.CategoryID, new SelectList(Model.CategoryItemList, "Value", "Text"), "Select Value", new { @class = "form-control  col-md-12", @id = "cmbCatItem" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UnitName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                    </div>
+                                                    @Html.DropDownListFor(model => model.UnitID, new SelectList(Model.UnitList, "Value", "Text"), "Select Value", new { @class = "form-control  col-md-12", @id = "cmbunitItem" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CategoryItemName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </div>
+                                                    @Html.EditorFor(model => model.CategoryItemName, new { htmlAttributes = new { @class = "form-control", placeholder = "Category Item Name" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.CategoryItemName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description", style = "width:196%;height:50px" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+
+                                    </div>
+                                    <div class="row" style="margin-bottom: 15px;">
+                                        <div class="col-lg-12">
+                                            <hr />
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-3" style="text-align: left">
+                                                <input type="submit" id="save" value="Save" class="btn btn-block btn-success" />
+                                            </div>
+                                            <div class="col-lg-3" style="text-align: center">
+                                                @Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+}

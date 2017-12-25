@@ -1,0 +1,296 @@
+﻿@model SKMISApplication.Models.AC_AccountsEntryModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Accounts Entry</h3>
+                        <div style="float: right;">
+                            @Html.ActionLink("Back to Search", "Index", "AC_AccountsEntry", new { @class = "btn btn-block btn-primary" })
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.BeneficiaryID, htmlAttributes: new { @class = "control-label col-md-4", @id = "bid" })
+                        <div class="header-div">
+                            <div class="form-horizontal">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.BeneficiaryName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @id = "formid", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.GPU, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.GPU, new { htmlAttributes = new { @class = "form-control", @id = "challan", placeholder = "GPU NAME", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ConstituencyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ConstituencyName, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.AllotmentNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.AllotmentNo, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.EntryDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    @*@Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control pull-right", @id = "datepicker", placeholder = "Date Of Issue" } })*@
+                                                    @Html.TextBoxFor(m => m.EntryDate, "{0:dd/MM/yyyy}", new { @class = "form-control pull-right", @id = "datepicker" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.EntryDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @id = "beneficiaryname", @readonly = "readonly" } })
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="dts" style="vertical-align: middle; margin-left:20%;"></label>
+                                </div>
+                                <div class="row" style="margin-bottom: 15px;">
+                                    <div class="col-lg-12">
+                                        <hr />
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-3" style="text-align: left">
+                                            <input type="button" id="save" value="Save" class="btn btn-block btn-success" onclick="addParam()" />
+                                        </div>
+                                        <div class="col-lg-3" style="text-align: center;">
+                                            @Html.ActionLink("Cancel", "Index", "AC_AccountsEntry", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                            @*@Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })*@
+                                            @*<input type="submit" value="Cancel" class="btn btn-block btn-danger" />*@
+                                        </div>
+                                        <div class="col-lg-3"></div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="overlay" id="tblAccountEntry">
+
+                                </div>
+
+
+                                <div class="row" style="margin-bottom: 15px;">
+                                    <div class="col-lg-12">
+                                        <hr />
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-3" style="text-align: left">
+                                            <input type="button" id="save" value="Save" class="btn btn-block btn-success" onclick="addParam()" />
+                                        </div>
+                                        <div class="col-lg-3" style="text-align: center;">
+                                            @Html.ActionLink("Cancel", "Index", "AC_AccountsEntry", htmlAttributes: new { @class = "btn btn-block btn-danger" })
+                                            @*@Html.ActionLink("Cancel", "Index", "", htmlAttributes: new { @class = "btn btn-block btn-danger" })*@
+                                            @*<input type="submit" value="Cancel" class="btn btn-block btn-danger" />*@
+                                        </div>
+                                        <div class="col-lg-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </section>
+}
+
+<script>
+    $(function () {
+        //Date picker
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+    });
+    function loadAjax() {
+        $('body').pleaseWait();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoadAccountsEntryTable")',
+            dataType: 'json',
+            data: { cid: $('#cid').val(), bid: $('#bid').val() },
+            success: function (result) {
+                //alert(454);
+                //alert(result.data.Data);
+                //console.log(result);
+                if (result == "error") {
+                    swal({
+                        title: "You have entered excess Quantity Due..!",
+                        text: "",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                    return;
+                }
+                var obj1 = result.vdata;
+                var vndDrpList = '<select id="cmbVendor">';
+                $.each(obj1, function (i, item) {
+
+                    vndDrpList = vndDrpList + '<option value="' + item.ID + '">' + item.Name + '</option>'
+                });
+                vndDrpList = vndDrpList + '</select>';
+
+
+                var table = '<table id="tblAcEntry" class="table table-bordered table-hover"><thead><tr><th style="display:none">ITEM ID</th><th style="width: 30%">Description</th>' +
+                    '<th style="width: 15%">Vendor</th><th style="width: 10%">Unit</th><th style="width: 10%">Qty</th>' +
+                    '<th style="width: 10%">Rate</th><th style="width: 10%">Amount</th>' +
+                    '<th style="width: 15%">Remarks</th></tr></thead><tbody>';
+
+                var obj = jQuery.parseJSON(result.data.Data);
+                $.each(obj, function (i, item) {
+
+                    table = table + "<tr><td style='display:none;'>" + item.ID + "</td><td>" + item.CategoryItemName + "</td>" +
+                        "<td>" + vndDrpList + "</td><td>" + item.UnitName + "</td><td><input id='txtQty' type='number'  onkeyup='calcQtyAmt()' /></td>" +
+                        "<td><input id='txtRate' type='number'  onkeyup='calcQtyAmt()' /></td>" +
+                        "<td> <input id='txtAmount' type='number' readonly value='0.00'/></td><td><input id='txtRemarks' type='text'/></td></tr>";
+                });
+
+                document.getElementById("tblAccountEntry").innerHTML = table + '</tbody></table>';
+                $('body').pleaseWait('stop');
+                ShortTable("#tblAcEntry");
+
+            }
+        });
+        //setTimeout(function () {
+        //    $('body').pleaseWait('stop');
+        //}, 300);
+    }
+
+    function addParam() {
+        var rowCount = $('#tblitemallocation >tbody >tr').length;
+        var i = 0;
+        if (rowCount > 0) {
+            propertyList = new Array();
+            $('#tblitemallocation  >tbody >tr').each(function () {
+                var property = {};
+                if ($(this).find("input[id^='txtQtyToIssue']").val() != '') {
+
+                    property.ItemID = parseInt($(this).children("td:first-child").text());
+                    property.BeneficiaryID = parseInt($("#bid").val());
+                    property.ConstituencyID = parseInt($("#cid").val());
+                    property.Quantity = parseFloat($(this).find("input[id^='txtQtyToIssue']").val());
+                    property.IssueDate = $("#datepicker").val();
+                    property.VehicleNo = $("#vehicleno").val();
+                    property.OrderPlaceBy = $("#orderplaceby").val();
+                    property.ChallanNo = $("#challan").val();
+
+                    propertyList[i++] = property;
+
+                }
+            });
+            if (propertyList.length > 0) {
+                SaveItem(propertyList);
+            }
+            else {
+                swal({
+                    title: "Please Enter Data...!",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
+            }
+        }
+    }
+
+    function SaveItem(Items) {
+        //alert(JSON.stringify(Items));
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SaveItemForBeneficiary")',
+            dataType: 'json',
+            data: { Items: Items },
+            success: function (result) {
+                //if (result == "success") {
+                //    loadAjax();
+                //}
+                loadAjax();
+            }
+        });
+    }
+
+    function calcQtyAmt(qtyDue) {
+        
+        var $tbody = $('table#tblAcEntry tbody');
+        
+        $tbody.children('tr').each(function () {
+            //alert($(this).find("input[id^='txtRate']").val());
+            if (($(this).find("input[id^='txtQty']").val() != '' && $(this).find("input[id^='txtRate']").val() != '') ||
+                ($(this).find("input[id^='txtQty']").val() != '' && $(this).find("input[id^='txtRate']").val() == '') ||
+                ($(this).find("input[id^='txtQty']").val() == '' && $(this).find("input[id^='txtRate']").val() != '')) {
+
+                var qty = parseFloat($(this).find("td:eq(4)").find('#txtQty').val());
+                var rate = parseFloat($(this).find("td:eq(5)").find('#txtRate').val());
+                var amt = qty * rate;
+                amt = isNaN(amt) ? '0.00' : amt;
+                
+                $(this).find("td:eq(6)").find('#txtAmount').val(amt);
+
+            }
+
+        });
+
+
+    }
+
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "sScrollX": "99.8%",
+            "paging": false
+        });
+    }
+    $(document).ready(function () {
+        loadAjax();
+    });
+
+
+</script>

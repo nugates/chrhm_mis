@@ -1,0 +1,141 @@
+﻿@model IEnumerable<SKMISApplication.Models.VendorEntryModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Vendor List</h3>
+                    <div style="float: right;">
+                        @*<button type="button" class="btn btn-block btn-primary" onclick="redirect()" id="btn_create">CREATE BENEFICIERY</button>*@
+                        @Html.ActionLink("CREATE VENDOR", "Create", "VendorEntry", new { @class = "btn btn-block btn-primary" })
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table" id="tblVendor">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.VendorName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.VendorAddress)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.City)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PinCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MobileNo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Fax)
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VendorName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VendorAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.City)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PinCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MobileNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fax)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "Edit", new { id = item.VendorId }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-edit" })
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash"
+                                           onclick="deleteVendor(@item.VendorId, '@item.VendorName')"></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    window.onload = function () { ShortTable("#tblVendor"); };
+
+    function ShortTable(Tbl) {
+        $(Tbl).DataTable({
+            "order": [[0, "desc"]],
+            "sScrollX": "99.8%"
+        });
+    }
+
+    function deleteVendor(id, aname) {
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        },
+            function () {
+                var url = '@Url.Action("Delete")';
+        loadAjax(id, url);
+            });
+
+        return false;
+}
+
+function loadAjax(id, url) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        data: { id: id },
+        success: function (result) {
+            //alert("deleted successfully!");
+            swal({
+                title: "Deleted Successfully...!",
+                text: "",
+                type: "success",
+                timer: 5000,
+                showConfirmButton: false
+            });
+            //alert($('#result').html(result));
+            location.reload();
+
+        }
+    });
+}
+</script>
+
+
+
