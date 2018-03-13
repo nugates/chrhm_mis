@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Lambton, Waratah, Mayfield.kml</name>
+	<Schema name="catchment_boundaries_FFAS" id="S_catchment_boundaries_FFAS_IS">
+		<SimpleField type="int" name="Id"><displayName>&lt;b&gt;Id&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Name"><displayName>&lt;b&gt;Name&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="falseColor">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Style id="falseColor0">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<StyleMap id="falseColor1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#falseColor0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#falseColor</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>Lambton, Waratah, Mayfield</name>
+		<styleUrl>#falseColor1</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_catchment_boundaries_FFAS_IS">
+				<SimpleData name="Id">0</SimpleData>
+				<SimpleData name="Name">Styx/Throsby Creek</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						151.7279052734374,-32.88671874999903,0 151.7252797554887,-32.88901710056178,0 151.7211617568644,-32.89511073355306,0 151.7199704708679,-32.9055082599906,0 151.7071106396186,-32.90428207032361,0 151.7023706267413,-32.90930686878235,0 151.70161545703,-32.91131105980991,0 151.7035251886608,-32.91685492822391,0 151.7026322783544,-32.91980728359932,0 151.7230404819074,-32.92337251738378,0 151.7271570188411,-32.93444381583225,0 151.7278593554294,-32.94593508212827,0 151.7303873982759,-32.94372919774216,0 151.7319954291294,-32.9431248720615,0 151.7336267355422,-32.94306581994852,0 151.7352978208006,-32.94332576859031,0 151.7376858710933,-32.94286632914205,0 151.7400095012371,-32.94203454108953,0 151.7389408245049,-32.9402878734578,0 151.7394761173457,-32.93653534613355,0 151.740247403011,-32.93161370876734,0 151.7462158203124,-32.92816162109284,0 151.7472364004574,-32.92340431868285,0 151.7488035416211,-32.92213953513192,0 151.751684126038,-32.92003055213798,0 151.7506103515624,-32.91851806640534,0 151.7474165501428,-32.91377671922725,0 151.7481689453126,-32.91168212890534,0 151.7492675781249,-32.91168212890534,0 151.7499389648437,-32.91156005859284,0 151.7501220703125,-32.91058349609278,0 151.7510375976563,-32.90948486328033,0 151.7521362304686,-32.90893554687403,0 151.7534179687499,-32.90838623046779,0 151.75390625,-32.90759277343659,0 151.7563793094978,-32.90744439566208,0 151.7572089738198,-32.90428035002109,0 151.7554321289062,-32.90411376953035,0 151.75390625,-32.90368652343658,0 151.7529907226563,-32.90313720703028,0 151.7529907226563,-32.90026855468653,0 151.7518920898436,-32.89660644531159,0 151.7507934570311,-32.89495849609284,0 151.7474975585936,-32.89410400390533,0 151.7459716796874,-32.89178466796779,0 151.7400512695311,-32.8903808593741,0 151.7391357421874,-32.88836669921778,0 151.7279052734374,-32.88671874999903,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

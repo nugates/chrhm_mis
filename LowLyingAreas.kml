@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Low Lying Areas.kml</name>
+	<Schema name="catchment_boundaries_FFAS" id="S_catchment_boundaries_FFAS_IS">
+		<SimpleField type="int" name="Id"><displayName>&lt;b&gt;Id&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Name"><displayName>&lt;b&gt;Name&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="falseColor">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<StyleMap id="falseColor0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#falseColor</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#falseColor1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="falseColor1">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Placemark>
+		<name>Low Lying Areas</name>
+		<styleUrl>#falseColor0</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_catchment_boundaries_FFAS_IS">
+				<SimpleData name="Id">0</SimpleData>
+				<SimpleData name="Name">Low Lying Areas</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						151.7571492521671,-32.90449631593526,0 151.7563793094978,-32.90744439566208,0 151.75390625,-32.90759277343659,0 151.7534179687499,-32.90838623046779,0 151.7521362304686,-32.90893554687403,0 151.7510375976563,-32.90948486328033,0 151.7501220703125,-32.91058349609278,0 151.7499389648437,-32.91156005859284,0 151.7492675781249,-32.91168212890534,0 151.7481689453126,-32.91168212890534,0 151.7474165501428,-32.91377671922725,0 151.7506103515624,-32.91851806640534,0 151.751684126038,-32.92003055213798,0 151.7517038947011,-32.92004761630744,0 151.7539388460031,-32.92197681037897,0 151.7561225683477,-32.92292098531692,0 151.7599414070688,-32.92457213470504,0 151.7620736342528,-32.92312508839882,0 151.7635943710817,-32.92453040610518,0 151.7650601190612,-32.92525376225093,0 151.772312716207,-32.92475883436169,0 151.7767099601459,-32.92534894069109,0 151.7785944932625,-32.92553929757168,0 151.7820223020749,-32.92570572709615,0 151.7836008792186,-32.92559640463583,0 151.7856356602306,-32.92554028638886,0 151.7904700380578,-32.9231268455944,0 151.7897892845022,-32.91806124530194,0 151.7904547045899,-32.91542239542685,0 151.7869783040737,-32.90876880256599,0 151.7905593839416,-32.89808821945324,0 151.788041637692,-32.89710475879416,0 151.7860631795562,-32.8990543974079,0 151.7775340212394,-32.90215721372482,0 151.7695989389656,-32.90215096171579,0 151.7574449982791,-32.90342682523067,0 151.7571492521671,-32.90449631593526,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

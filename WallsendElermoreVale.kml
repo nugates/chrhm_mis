@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Wallsend, Elermore Vale.kml</name>
+	<Schema name="catchment_boundaries_FFAS" id="S_catchment_boundaries_FFAS_IS">
+		<SimpleField type="int" name="Id"><displayName>&lt;b&gt;Id&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Name"><displayName>&lt;b&gt;Name&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="falseColor">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Style id="falseColor0">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<StyleMap id="falseColor1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#falseColor</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#falseColor0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>Wallsend, Elermore Vale</name>
+		<styleUrl>#falseColor1</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_catchment_boundaries_FFAS_IS">
+				<SimpleData name="Id">0</SimpleData>
+				<SimpleData name="Name">Ironbark Creek</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						151.684532966373,-32.91629381018453,0 151.6829943344588,-32.9151403867129,0 151.6806156744789,-32.91467785206134,0 151.6799015229615,-32.91388297780219,0 151.67981074267,-32.91300721387079,0 151.6806649876021,-32.91135409450636,0 151.6811160941382,-32.90890938114513,0 151.6801142437022,-32.90653689357946,0 151.6788013591385,-32.90416102082059,0 151.6779019851743,-32.90187697993662,0 151.6771128182367,-32.89915674049976,0 151.6760903547296,-32.89818363882386,0 151.6754903579664,-32.89669008535646,0 151.6700791237525,-32.89103391632358,0 151.6682039002929,-32.89162625761963,0 151.6669414791272,-32.89283758689913,0 151.6650306823271,-32.89579150197931,0 151.6628312116197,-32.89725519253273,0 151.6612549399961,-32.89863804659893,0 151.6601839283196,-32.90090100954388,0 151.6607836031467,-32.90239462870511,0 151.6603412009101,-32.90422696706902,0 151.6576242501609,-32.90559754166696,0 151.6557526050765,-32.90592731365816,0 151.6524106950888,-32.90746599269372,0 151.6492827435361,-32.90856944673848,0 151.6462278526716,-32.91168571675238,0 151.6432843430871,-32.91427820062054,0 151.643233627367,-32.91760190579849,0 151.6464350242023,-32.91851141826558,0 151.648385471446,-32.91984468162836,0 151.6492974807042,-32.9211892645201,0 151.678408737403,-32.92540747431742,0 151.680069107601,-32.92636071807982,0 151.6809960187193,-32.92540279122982,0 151.6832122042406,-32.92607778528122,0 151.6849488019257,-32.92625486236852,0 151.6855740575664,-32.92316606260073,0 151.686236507475,-32.92163207983236,0 151.6859770053767,-32.91683382969786,0 151.684532966373,-32.91629381018453,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

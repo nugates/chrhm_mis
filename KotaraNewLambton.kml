@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Kotara, New Lambton.kml</name>
+	<Schema name="catchment_boundaries_FFAS" id="S_catchment_boundaries_FFAS_IS">
+		<SimpleField type="int" name="Id"><displayName>&lt;b&gt;Id&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Name"><displayName>&lt;b&gt;Name&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<StyleMap id="falseColor">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#falseColor1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#falseColor0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="falseColor0">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Style id="falseColor1">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Placemark>
+		<name>Kotara, New Lambton</name>
+		<styleUrl>#falseColor</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_catchment_boundaries_FFAS_IS">
+				<SimpleData name="Id">0</SimpleData>
+				<SimpleData name="Name">Upper Styx Creek</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						151.6927053783461,-32.92965849400548,0 151.6891166316996,-32.93532136326206,0 151.689337330954,-32.93895186431337,0 151.6846784038695,-32.94847675616029,0 151.6989044410902,-32.95054036518096,0 151.6998077190586,-32.9507157850345,0 151.7016711391372,-32.9507197465872,0 151.7030604521694,-32.95121067150021,0 151.7122998580844,-32.95249369456136,0 151.7136607431316,-32.95152770992334,0 151.71576527949,-32.9516976753196,0 151.7240921126076,-32.94993338908447,0 151.7272411564596,-32.94781136472502,0 151.7278593554294,-32.94593508212827,0 151.7271570188411,-32.93444381583225,0 151.7230404819074,-32.92337251738378,0 151.7026322783544,-32.91980728359934,0 151.7010739676022,-32.92267207248691,0 151.6981093854252,-32.92375342783284,0 151.696036510503,-32.92662519087153,0 151.6927053783461,-32.92965849400548,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

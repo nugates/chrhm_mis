@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Merewether, Cooks Hill, CBD.kml</name>
+	<Schema name="catchment_boundaries_FFAS" id="S_catchment_boundaries_FFAS_IS">
+		<SimpleField type="int" name="Id"><displayName>&lt;b&gt;Id&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Name"><displayName>&lt;b&gt;Name&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="falseColor">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="falseColor0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#falseColor1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#falseColor</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="falseColor1">
+		<IconStyle>
+			<colorMode>random</colorMode>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Id</b></td><td>$[catchment_boundaries_FFAS/Id]</td></tr>
+  <tr><td><b>Name</b></td><td>$[catchment_boundaries_FFAS/Name]</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<colorMode>random</colorMode>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7fffffff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Placemark>
+		<name>Merewether, Cooks Hill, CBD</name>
+		<styleUrl>#falseColor0</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_catchment_boundaries_FFAS_IS">
+				<SimpleData name="Id">0</SimpleData>
+				<SimpleData name="Name">Cottage Creek</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						151.7278593554294,-32.94593508212827,0 151.7272476749184,-32.94782036364018,0 151.7282080458174,-32.94914618260177,0 151.7297085931538,-32.95039227718353,0 151.7302571305277,-32.94971181343261,0 151.7342708869825,-32.94932408822815,0 151.7364279086867,-32.94790462368542,0 151.7389635706869,-32.94703586797061,0 151.7432133979986,-32.94736107241266,0 151.744749563839,-32.9486430378451,0 151.7463652044523,-32.95020886579408,0 151.7469758188402,-32.9520213660685,0 151.7488555930348,-32.95266382054007,0 151.7500453235377,-32.95190239301815,0 151.7524009899333,-32.95287797203059,0 151.7542014980496,-32.9523459771221,0 151.7557376823506,-32.9508430495614,0 151.7568748620511,-32.9481838944817,0 151.7638196331192,-32.94367710486001,0 151.7696567793305,-32.93986916662246,0 151.7722296569991,-32.93823559798074,0 151.7749617701379,-32.9379040179176,0 151.7779169034127,-32.93649740761444,0 151.7778188377101,-32.93476251520639,0 151.7777514264088,-32.9332148901057,0 151.7813345237729,-32.93218690985313,0 151.7824673823324,-32.93242190083677,0 151.7843719139675,-32.93086976061817,0 151.787264852591,-32.92887872832583,0 151.7902815376439,-32.92978809957916,0 151.7909251307526,-32.92861082998277,0 151.7928827989991,-32.92531218931119,0 151.7904700380578,-32.9231268455944,0 151.7856356602306,-32.9255402863889,0 151.7836008792186,-32.92559640463585,0 151.7820223020749,-32.92570572709619,0 151.7785944932625,-32.92553929757171,0 151.7767099601459,-32.92534894069109,0 151.772312716207,-32.92475883436169,0 151.7650601190612,-32.92525376225093,0 151.7635943710817,-32.92453040610518,0 151.7620736342528,-32.92312508839882,0 151.7599414070688,-32.92457213470504,0 151.7539388460031,-32.92197681037897,0 151.7517038947011,-32.92004761630744,0 151.7472364004574,-32.92340431868285,0 151.7462300860343,-32.92809512327421,0 151.7462158203124,-32.92816162109284,0 151.7420765596969,-32.93055573829854,0 151.740247403011,-32.93161370876737,0 151.7401246213325,-32.93239718877271,0 151.7394761173457,-32.93653534613355,0 151.7390427119845,-32.9395736185281,0 151.7389408245049,-32.9402878734578,0 151.7400095012371,-32.94203454108953,0 151.7376858710933,-32.94286632914209,0 151.7352978208006,-32.94332576859033,0 151.7336267355422,-32.94306581994852,0 151.7336002088304,-32.94306678019632,0 151.7319954291294,-32.9431248720615,0 151.7303873982759,-32.94372919774216,0 151.7278593554294,-32.94593508212827,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
